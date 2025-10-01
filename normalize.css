@@ -1,0 +1,82 @@
+/* Simple Normalize CSS (minimal) */
+
+/* Box model */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Remove default margins/padding on root elements */
+html, body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Base body */
+html, body {
+  height: 100%;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Make images and media scale */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make form elements inherit font & remove inconsistent styling */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/* Buttons: clickable and reset */
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Lists */
+ul[class], ol[class] {
+  list-style: none;
+}
+
+/* Tables: base */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Prevent overflow on long words */
+p, span, a, li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Pre/code */
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 0.95em;
+}
+
+/* Accessibility: focus outline for keyboard users */
+
+/* Small helper for visually-hidden (sr-only) */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}

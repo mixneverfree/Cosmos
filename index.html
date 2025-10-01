@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos</title>
+    <link rel="shortcut icon" href="Cosmos.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anta&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="#"><img id="imgn" src="Cosmos.png"><span id="Cosmos">Cosmos</span></a>
+            </div>
+
+            <input type="search-input" placeholder="Buscar produtos..." autocomplete="off" class="pesquisa">
+
+            <!-- Botão hamburguer para mobile -->
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="17" x2="20" y2="17" />
+                </svg>
+            </button>
+
+            <div class="navbar">
+                <ul>
+                    <li class="navbar-element"><a href="home.html">Início</a></li>
+                    <li class="navbar-element"><a href="#">Categorias</a></li>
+                </ul>
+                <button id="button-login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-log-in-icon lucide-log-in">
+                        <path d="m10 17 5-5-5-5" />
+                        <path d="M15 12H3" />
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    </svg>
+                    Login
+                </button>
+                <button id="button-venda">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-shopping-cart-icon lucide-shopping-cart">
+                        <circle cx="8" cy="21" r="1" />
+                        <circle cx="19" cy="21" r="1" />
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                    </svg>
+                    Vender
+                </button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-user-icon lucide-user">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1 -->
+        <section class="section1">
+            <div class="section1-container">
+                <div class="design-main">
+                    <div class="frase-circulo">
+                        <span class="frase-circulo-icon"></span>
+                        Negócios virtuais seguros
+                    </div>
+                    </span>
+                    <h1 class="texto-principal">
+                        Negocie produtos virtuais de forma
+                        <span class="texto-verde">simples e segura.</span>
+                    </h1>
+                    <p class="paragrafo-principal">
+                        Cosmos é o marketplace que conecta você ao universo digital, reunindo
+                        contas, jogos, itens virtuais, moedas online e gift cards em um só
+                        espaço, com praticidade, segurança e variedade.
+                    </p>
+                    <div class="buttons">
+                        <button class="descobrir">
+                            Descobrir
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                            </svg>
+                        </button>
+                        <button class="login">Logar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nova Section Advantages -->
+        <section class="section-advantages">
+            <div class="advantages">
+                <div class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-shield-check-icon lucide-shield-check">
+                        <path
+                            d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg><br>
+                    <span id="title-item">Segurança Garantida</span><br>
+                    <span id="frase-item">Transações protegidas com<br>sistema de mediação<br>confiável</span>
+                </div>
+                <div class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chart-no-axes-column-increasing-icon lucide-chart-no-axes-column-increasing">
+                        <path d="M5 21v-6" />
+                        <path d="M12 21V9" />
+                        <path d="M19 21V3" />
+                    </svg><br>
+                    <span id="title-item">Maximize seus Ganhos</span><br>
+                    <span id="frase-item">Compre e venda em poucos<br>cliques com interface<br>intuitiva</span>
+                </div>
+                <div class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-users-icon lucide-users">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <circle cx="9" cy="7" r="4" />
+                    </svg><br>
+                    <span id="title-item">Comunidade Ativa</span><br>
+                    <span id="frase-item">Milhares de usuários<br>negociando produtos virtuais<br>diariamente</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="section2">
+            <div class="section2-container">
+                <div class="text-button">
+                    <h2 class="text-products">Produtos em destaque</h2>
+                    <div class="buttons-products-div">
+                        <button class="button-products"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-left-icon lucide-chevron-left">
+                                <path d="m15 18-6-6 6-6" />
+                            </svg></button>
+                        <button class="button-products"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg></button>
+                    </div>
+                </div>
+                <div class="products">
+                    <div class="products-element"></div>
+                    <div class="products-element"></div>
+                    <div class="products-element"></div>
+                    <div class="products-element"></div>
+                    <div class="products-element"></div>
+                    <div class="products-element"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer">
+                <div class="footer-div">
+                    <div class="logo">
+                        <a href="#"><img id="imgn" src="Cosmos.png"><span id="Cosmos">Cosmos</span></a>
+                    </div>
+                    <p>Desde 2025, o Cosmos transforma o comércio digital no Brasil, oferecendo um marketplace seguro e
+                        eficiente para produtos virtuais.</p>
+                    <div class="footer-logo-buttons">
+                        <button id="button-social">
+                            <!-- Discord SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                class="bi bi-discord" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
+                            </svg>
+                        </button>
+                        <button id="button-social">
+                            <!-- Youtube SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                class="bi bi-youtube" viewBox="0 0 16 16">
+                                <path
+                                    d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z" />
+                            </svg>
+                        </button>
+                        <button id="button-social">
+                            <!-- Instagram SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-instagram-icon lucide-instagram">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="footer-div">
+                    <span class="title-footer">Links Rápidos</span>
+                    <div class="text-footer">
+                        <ul>
+                            <li><a href="#">Início</a></li>
+                            <li><a href="#">Categorias</a></li>
+                            <li><a href="#">Vender</a></li>
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-div">
+                    <span class="title-footer">Como Funciona</span>
+                    <div class="text-footer">
+                        <ul>
+                            <li><a href="#">Como funciona</a></li>
+                            <li><a href="#">Perguntas frequentes</a></li>
+                            <li><a href="#">Tarifas e prazos</a></li>
+                            <li><a href="#">Formas de pagamento</a></li>
+                            <li><a href="#">Verificador de contas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-div">
+                    <span class="title-footer">Suporte</span>
+                    <div class="text-footer">
+                        <ul>
+                            <li><a href="#">Central de Ajuda</a></li>
+                            <li><a href="#">Discord</a></li>
+                            <li><a href="#">Contato</a></li>
+                            <li><a href="#">Termos de Uso</a></li>
+                            <li><a href="#">Política de Privacidade</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-footer">
+                © 2025 Cosmos Marketplace. Todos os direitos reservados.
+                <ul>
+                    <li><a href>Termos</a></li>
+                    <li><a href>Privacidade</a></li>
+                    <li><a href>Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
