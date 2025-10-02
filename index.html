@@ -23,11 +23,16 @@
     <header>
         <div class="header-container">
             <div class="div-header">
-                <div class="logo">
-                    <a href="#"><img id="imgn" src="Cosmos.png"><span id="Cosmos">Cosmos</span></a>
-                </div>
+                <a href>
+                    <div class="logo">
+                        <img class="imgn" src="Cosmos.png">
+                        <span class="Cosmos">Cosmos</span>
+                    </div>
+                </a>
 
-                <input type="search-input" placeholder="Buscar produtos..." autocomplete="off" class="pesquisa">
+                <div class="search-bar">
+                    <input type="search-input" placeholder="Buscar produtos..." autocomplete="off" class="search-bar-input">
+                </div>
 
                 <!-- Botão hamburguer para mobile -->
                 <button class="menu-toggle" aria-label="Abrir menu">
@@ -39,39 +44,44 @@
                     </svg>
                 </button>
 
-                <div class="navbar">
-                    <ul>
-                        <li class="navbar-element"><a href="home.html">Início</a></li>
-                        <li class="navbar-element"><a href="#">Categorias</a></li>
-                    </ul>
-                    <button id="button-login">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-log-in-icon lucide-log-in">
-                            <path d="m10 17 5-5-5-5" />
-                            <path d="M15 12H3" />
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                        </svg>
-                        Login
-                    </button>
-                    <button id="button-venda">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-shopping-cart-icon lucide-shopping-cart">
-                            <circle cx="8" cy="21" r="1" />
-                            <circle cx="19" cy="21" r="1" />
-                            <path
-                                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-                        </svg>
-                        Vender
-                    </button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-user-icon lucide-user">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                </div>
+                <nav class="navbar">
+                    <button class="navbar-button">Início</button>
+                    <button class="navbar-button">Categorias</button>
+                    <div class="div-buttons-navbar">
+
+                        <button class="button-login">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-log-in-icon lucide-log-in">
+                                <path d="m10 17 5-5-5-5" />
+                                <path d="M15 12H3" />
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                            </svg>
+                            Login
+                        </button>
+
+                        <button class="button-venda">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart">
+                                <circle cx="8" cy="21" r="1" />
+                                <circle cx="19" cy="21" r="1" />
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                            </svg>
+                            Vender
+                        </button>
+
+                        <button class="button-profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-icon lucide-user">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
             </div>
         </div>
     </header>
