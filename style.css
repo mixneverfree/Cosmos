@@ -26,6 +26,7 @@
     align-items: center;
     gap: 0.5rem;
     border: 1px solid #578D3F;
+    background-color: #36652f1a;
     color: #578D3F;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -240,9 +241,19 @@
 
 .text-products {
     font-family: "Inter", system-ui, sans-serif;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+    font-size: 3rem;
+    line-height: 1;
     color: #fbfafa;
+    margin-bottom: 0.75rem;
+}
+
+.text-products-destaque {
+    color: #417939;
+}
+
+.paragrafo-products {
+    text-wrap: nowrap;
+    color: #aab0bb;
 }
 
 .buttons-products-div {
@@ -278,18 +289,16 @@
 .products {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding: 1.5rem;
     border-radius: 0.75rem;
-    background-color: #0a0a0a;
-    border: 1px solid #333333;
-    gap: 1.5rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+    gap: 1rem;
 }
 
 .products-element {
     aspect-ratio: 1 / 1;
-    background-color: #171717;
-    border: 1px solid #333333;
+    background-color: #17171780;
+    border: 1px solid #33333380;
     border-radius: 0.75rem;
     cursor: pointer;
     overflow: hidden;
@@ -297,9 +306,9 @@
 }
 
 .products-element:hover {
-    background-color: #222222;
+    background-color: #22222280;
     transform: translateY(-0.5rem);
-    border: 1px solid #4A8C3C;
+    border: 1px solid #4A8C3C80;
     box-shadow: 0 4px 20px #36652f33;
 
 }
@@ -359,7 +368,12 @@ html {
     min-height: 100vh;
     background-attachment: fixed;
     overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #4A8C3C #0000;
 }
+
+body::-webkit-scrollbar {width: 0.5rem; height: 0.5rem;}
+body::-webkit-scrollbar-thumb {background-color: #4A8C3C; border-radius: 0.5rem;}
 
 /* ===== FONTES ===== */
 
@@ -396,8 +410,8 @@ a {
 header {
     position: fixed;
     top: 0;
-    width: 100%;
-    z-index: 999;
+    width: calc(100% - 0.5rem);
+    z-index: 9999;
     backdrop-filter: blur(6px);
     border-bottom: 1px solid #333333;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
@@ -833,6 +847,12 @@ header {
     .paragrafo-principal {
         font-size: 1.125rem;
         line-height: 1.75rem;
+    }
+
+    .text-products {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        margin-bottom: 0;
     }
 
     .design-grid-advantages {
