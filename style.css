@@ -379,22 +379,22 @@ body::-webkit-scrollbar-thumb {background-color: #4A8C3C; border-radius: 0.5rem;
 
 @font-face {
     font-family: Noopla;
-    src: url('font/NooplaRegular.woff') format('woff');
-    src: url('font/NooplaRegular.woff2') format('.woff2');
+    src: url('Arquivos/font/NooplaRegular.woff') format('woff');
+    src: url('Arquivos/font/NooplaRegular.woff2') format('.woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: Tango;
-    src: url(tangosans/TangoSans.ttf) format(truetype);
+    src: url(Arquivos/tangosans/TangoSans.ttf) format(truetype);
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: Tommy-menor;
-    src: url(made_tommy/MADE\ TOMMY\ Medium_PERSONAL\ USE.otf) format(opentype);
+    src: url(Arquivos/made_tommy/MADE\ TOMMY\ Medium_PERSONAL\ USE.otf) format(opentype);
     font-weight: normal;
     font-style: normal;
 }
@@ -450,11 +450,11 @@ header {
 }
 
 .Cosmos {
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: Noopla;
     color: #fbfafa;
     font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
+    line-height: 1;
+    font-weight: 500;
 }
 
 .search-bar {
