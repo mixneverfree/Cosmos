@@ -361,7 +361,9 @@
 
 body,
 html {
-    background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
+    background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), 
+                        radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), 
+                        linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
     color: #fbfafa;
     font-family: "Inter", sans-serif, system-ui;
     margin: 0 auto;
@@ -370,6 +372,20 @@ html {
     overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: #4A8C3C #0000;
+}
+
+body::before {
+    content: '';
+    background-image: linear-gradient(rgba(74, 140, 60, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 140, 60, 0.03) 1px, transparent 1px);
+    background-size: 35px 35px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
 }
 
 body::-webkit-scrollbar {width: 0.5rem; height: 0.5rem;}
@@ -447,11 +463,11 @@ header {
     max-width: 100%;
     min-width: 2.5rem;
     min-height: 2.5rem;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
 }
 
 .logo:hover img {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 
 .Cosmos {
@@ -645,12 +661,12 @@ header {
 /* ===== FOOTER ===== */
 
 .footer-section {
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(3px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: 1px solid #333333;
+    border-top: 1px solid #333333;
 }
 
 .footer-container {
