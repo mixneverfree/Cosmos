@@ -518,8 +518,8 @@
             padding-block: 0.5rem;
             padding-left: 3rem;
             background-color: transparent;
-            border: 1px solid #333333;
-            border-radius: 99999px;
+            border: 2px solid #333333;
+            border-radius: 0.875rem;
             transition: all 0.3s ease;
             font-weight: 400;
             font-size: 0.875rem;
@@ -530,20 +530,13 @@
             background-size: 1.25rem;
         }
 
-        .search-bar-input::placeholder {
-            color: #aab0bb;
-        }
-
-        .search-bar:hover {
-            color: #4A8C3C;
-        }
-
-        .search-bar-input:hover {
-            border: 1px solid #333333;
+        .search-bar-input:hover{
+            border: 2px solid rgba(74, 140, 60, 0.2);
         }
 
         .search-bar-input:focus {
-            border: 1px solid #4A8C3C;
+            border: 2px solid #4A8C3C;
+            box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
         }
 
         .navbar {
@@ -866,14 +859,15 @@
                 display: flex;
                 height: 2.5rem;
                 width: 100%;
-                border: 1px solid #333333;
+                border: 2px solid #333333;
                 padding-inline: 0.75rem;
                 padding-block: 0.5rem;
                 padding-left: 3rem;
                 font-size: 1rem;
-                border-radius: 99999px;
+                border-radius: 0.875rem;
                 line-height: 1.5rem;
                 font-weight: 400;
+                transition: all 0.3s ease;
                 background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23aab0bb%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%278%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.65%27%20y2%3D%2716.65%27%2F%3E%3C%2Fsvg%3E");
                 background-repeat: no-repeat;
                 background-position: left 1.125rem center;
@@ -881,8 +875,13 @@
 
             }
 
-            .search-bar-md-input::placeholder {
-                color: #aab0bb;
+            .search-bar-md-input:hover {
+                border: 2px solid rgba(74, 140, 60, 0.2);
+            }
+
+            .search-bar-md-input:focus {
+                border: 2px solid #4A8C3C;
+                box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
             }
 
             .texto-principal {
