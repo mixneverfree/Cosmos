@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos - Categorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), 
+                        radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), 
+                        linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #fbfafa;
+            padding-top: 5rem;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74, 140, 60, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .header-container {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fbfafa;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fbfafa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #aab0bb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4A8C3C;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 72rem;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(54, 101, 47, 0.15);
+            border: 1px solid rgba(74, 140, 60, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            color: #4A8C3C;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fbfafa 0%, #aab0bb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, #4A8C3C, #578D3F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #aab0bb;
+            max-width: 42rem;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* SEARCH BAR */
+        .search-container {
+            max-width: 40rem;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.125rem 1.5rem 1.125rem 3.5rem;
+            background: rgba(23, 23, 23, 0.6);
+            border: 2px solid rgba(74, 140, 60, 0.2);
+            border-radius: 1rem;
+            color: #fbfafa;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #4A8C3C;
+            background: rgba(23, 23, 23, 0.8);
+            box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        /* CATEGORIES GRID */
+        .categories-section {
+            padding: 0 1.5rem 6rem;
+        }
+
+        .categories-container {
+            max-width: 72rem;
+            margin: 0 auto;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: linear-gradient(145deg, rgba(23, 23, 23, 0.7), rgba(15, 15, 15, 0.5));
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(54, 101, 47, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 140, 60, 0.5);
+            box-shadow: 0 12px 40px rgba(54, 101, 47, 0.2);
+        }
+
+        .category-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover .category-icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .category-icon {
+            width: 36px;
+            height: 36px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fbfafa;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-description {
+            font-size: 0.9375rem;
+            color: #aab0bb;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #4A8C3C;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* POPULAR BADGE */
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #4A8C3C, #578D3F);
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fbfafa;
+            z-index: 2;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">C</div>
+                <span class="logo-text">Cosmos</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#">Início</a>
+                <a href="#" style="color: #4A8C3C;">Categorias</a>
+                <a href="#">Vender</a>
+                <a href="#">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10"/>
+                </svg>
+                Mais de 10.000 produtos disponíveis
+            </div>
+            <h1 class="hero-title">
+                Explore o universo de <span class="highlight">itens virtuais</span>
+            </h1>
+            <p class="hero-subtitle">
+                Escolha a categoria que você procura e encontre as melhores ofertas do mercado com entrega instantânea
+            </p>
+
+            <!-- SEARCH -->
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Buscar por jogo, moeda ou item..."
+                >
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories-section">
+        <div class="categories-container">
+            <div class="categories-grid">
+                
+                <!-- Contas de Jogos -->
+                <div class="category-card">
+                    <span class="popular-badge">🔥 Popular</span>
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Contas de Jogos</h3>
+                    <p class="category-description">
+                        Contas verificadas de jogos populares com skins raras, níveis altos e muito mais
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">5.2k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 15</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Moedas Virtuais -->
+                <div class="category-card">
+                    <span class="popular-badge">🔥 Popular</span>
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v12M9 9h6M9 15h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Moedas Virtuais</h3>
+                    <p class="category-description">
+                        Recargas de V-Bucks, Robux, RP, Diamantes e outras moedas de jogos
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">3.8k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 10</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gift Cards -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Gift Cards</h3>
+                    <p class="category-description">
+                        Cartões presente para Steam, PlayStation, Xbox, Google Play e mais
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">2.1k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 20</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Itens In-Game -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Itens In-Game</h3>
+                    <p class="category-description">
+                        Skins exclusivas, armas raras, pets e itens colecionáveis de diversos jogos
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4.5k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 5</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boost e Serviços -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Boost & Serviços</h3>
+                    <p class="category-description">
+                        Subida de elo, leveling, missões completas e coaching profissional
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">1.9k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 30</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assinaturas -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                            <path d="M22 2v6h-6"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Assinaturas</h3>
+                    <p class="category-description">
+                        Planos e passes de temporada para seus jogos e plataformas favoritas
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">890+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 25</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NFTs e Colecionáveis -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">NFTs & Colecionáveis</h3>
+                    <p class="category-description">
+                        Itens digitais únicos, NFTs de jogos e colecionáveis exclusivos
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">650+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 50</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Códigos e Chaves -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Códigos & Chaves</h3>
+                    <p class="category-description">
+                        Keys de jogos, códigos promocionais e acesso antecipado a lançamentos
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">3.2k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 8</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Streaming -->
+                <div class="category-card">
+                    <div class="category-icon-wrapper">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Streaming & Mídia</h3>
+                    <p class="category-description">
+                        Contas de streaming, plataformas de vídeo e serviços de música premium
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">1.3k+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 12</span>
+                            <span class="stat-label">A partir de</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Animação de entrada dos cards
+        const cards = document.querySelectorAll('.category-card');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            observer.observe(card);
+        });
+
+        // Funcionalidade de busca (simulada)
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const title = card.querySelector('.category-title').textContent.toLowerCase();
+                const description = card.querySelector('.category-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = searchTerm === '' ? 'block' : 'none';
+                }
+            });
+        });
+
+        // Click nos cards
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.querySelector('.category-title').textContent;
+                console.log(`Categoria selecionada: ${category}`);
+                // Aqui você pode adicionar navegação para a página da categoria
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos - Contas de Jogos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), 
+                        radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), 
+                        linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #fbfafa;
+            padding-top: 5rem;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 9999;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74, 140, 60, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .header-container {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fbfafa;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fbfafa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #aab0bb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4A8C3C;
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            padding: 2rem 1.5rem 1rem;
+        }
+
+        .breadcrumb-container {
+            max-width: 72rem;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #4A8C3C;
+        }
+
+        .breadcrumb-separator {
+            color: #4a5568;
+        }
+
+        .breadcrumb-current {
+            color: #4A8C3C;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .content-container {
+            max-width: 72rem;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        /* SIDEBAR FILTERS */
+        .sidebar {
+            position: sticky;
+            top: 6rem;
+            height: fit-content;
+        }
+
+        .filter-section {
+            background: linear-gradient(145deg, rgba(23, 23, 23, 0.7), rgba(15, 15, 15, 0.5));
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fbfafa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            cursor: pointer;
+        }
+
+        .filter-checkbox {
+            width: 1.125rem;
+            height: 1.125rem;
+            accent-color: #4A8C3C;
+            cursor: pointer;
+        }
+
+        .filter-label {
+            font-size: 0.875rem;
+            color: #aab0bb;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .filter-count {
+            font-size: 0.75rem;
+            color: #6b7280;
+            background: rgba(74, 140, 60, 0.1);
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .price-input {
+            flex: 1;
+            padding: 0.5rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #2a2a2a;
+            border-radius: 0.5rem;
+            color: #fbfafa;
+            font-size: 0.875rem;
+            outline: none;
+        }
+
+        .price-input:focus {
+            border-color: #4A8C3C;
+        }
+
+        .apply-filter-btn {
+            width: 100%;
+            padding: 0.625rem;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border: none;
+            border-radius: 0.5rem;
+            color: #fbfafa;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .apply-filter-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* PRODUCTS SECTION */
+        .products-section {
+            min-height: 100vh;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fbfafa;
+            word-break: break-word;
+        }
+
+        .section-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .results-count {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .sort-dropdown {
+            padding: 0.5rem 1rem;
+            background: rgba(23, 23, 23, 0.7);
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 0.5rem;
+            color: #fbfafa;
+            font-size: 0.875rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem;
+            background: rgba(23, 23, 23, 0.7);
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 0.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn.active {
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            color: #fbfafa;
+            border-color: #4A8C3C;
+        }
+
+        /* PRODUCTS GRID */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(23, 23, 23, 0.7), rgba(15, 15, 15, 0.5));
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            max-width: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 140, 60, 0.5);
+            box-shadow: 0 12px 40px rgba(54, 101, 47, 0.25);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(74, 140, 60, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: linear-gradient(135deg, #4A8C3C, #578D3F);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fbfafa;
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-seller {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .seller-badge {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .seller-name {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .verified-icon {
+            width: 14px;
+            height: 14px;
+            color: #4A8C3C;
+        }
+
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #fbfafa;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .product-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            word-break: break-word;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-tag {
+            font-size: 0.75rem;
+            background: rgba(74, 140, 60, 0.15);
+            color: #4A8C3C;
+            padding: 0.25rem 0.625rem;
+            border-radius: 0.375rem;
+            border: 1px solid rgba(74, 140, 60, 0.3);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(74, 140, 60, 0.1);
+        }
+
+        .product-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .price-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #4A8C3C;
+        }
+
+        .buy-btn {
+            padding: 0.625rem 1.25rem;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border: none;
+            border-radius: 0.5rem;
+            color: #fbfafa;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(54, 101, 47, 0.4);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .filter-sections {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">C</div>
+                <span class="logo-text">Cosmos</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#">Início</a>
+                <a href="#">Categorias</a>
+                <a href="#">Vender</a>
+                <a href="#">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="#">Início</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#">Categorias</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Contas de Jogos</span>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="content-container">
+            <!-- SIDEBAR FILTERS -->
+            <aside class="sidebar">
+                <div class="filter-sections">
+                    <div class="filter-section">
+                        <h3 class="filter-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                            </svg>
+                            Jogos
+                        </h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Fortnite</span>
+                                <span class="filter-count">234</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">League of Legends</span>
+                                <span class="filter-count">189</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Valorant</span>
+                                <span class="filter-count">156</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Roblox</span>
+                                <span class="filter-count">312</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Minecraft</span>
+                                <span class="filter-count">98</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3 class="filter-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            Preço
+                        </h3>
+                        <div class="price-inputs">
+                            <input type="number" class="price-input" placeholder="Min">
+                            <input type="number" class="price-input" placeholder="Max">
+                        </div>
+                        <button class="apply-filter-btn">Aplicar</button>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3 class="filter-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            Extras
+                        </h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Email verificado</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Vendedor verificado</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox">
+                                <span class="filter-label">Entrega instantânea</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- PRODUCTS -->
+            <section class="products-section">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Contas de Jogos</h1>
+                        <p class="results-count">Mostrando 1.234 produtos</p>
+                    </div>
+                    <div class="section-info">
+                        <select class="sort-dropdown">
+                            <option>Mais relevantes</option>
+                            <option>Menor preço</option>
+                            <option>Maior preço</option>
+                            <option>Mais recentes</option>
+                            <option>Mais vendidos</option>
+                        </select>
+                        <div class="view-toggle">
+                            <button class="view-btn active">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                </svg>
+                            </button>
+                            <button class="view-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <line x1="8" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="8" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="8" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="3" y1="6" x2="3.01" y2="6" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="3" y1="12" x2="3.01" y2="12" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="3" y1="18" x2="3.01" y2="18" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="product-badge">Destaque</span>
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">JG</div>
+                                <span class="seller-name">JogadorPro</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Conta Fortnite Full Access</h3>
+                            <p class="product-description">
+                                Conta verificada com mais de 150 skins raras, vários packs de temporada e acesso total
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">150+ Skins</span>
+                                <span class="feature-tag">Email incluso</span>
+                                <span class="feature-tag">Nível 287</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 89</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">GX</div>
+                                <span class="seller-name">GameXpert</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">League of Legends Platina IV</h3>
+                            <p class="product-description">
+                                Conta ranqueada Platina IV com 78 campeões e diversas skins épicas e lendárias
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">78 Campeões</span>
+                                <span class="feature-tag">Platina IV</span>
+                                <span class="feature-tag">35 Skins</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 145</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="product-badge">Top 🔥</span>
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">VP</div>
+                                <span class="seller-name">ValorPro</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Valorant Diamante + Skins</h3>
+                            <p class="product-description">
+                                Conta Diamante 2 com coleção de skins premium incluindo Elderflame e Reaver
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Diamante II</span>
+                                <span class="feature-tag">Skins Premium</span>
+                                <span class="feature-tag">Verificada</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 320</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">RB</div>
+                                <span class="seller-name">RobloxBR</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Roblox Premium com Robux</h3>
+                            <p class="product-description">
+                                Conta com 25.000 Robux, assinatura premium ativa e diversos itens limitados
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">25k Robux</span>
+                                <span class="feature-tag">Premium</span>
+                                <span class="feature-tag">Limitados</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 199</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">MC</div>
+                                <span class="seller-name">MineCompany</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Minecraft Java Premium</h3>
+                            <p class="product-description">
+                                Conta original Minecraft Java Edition com acesso total e garantia vitalícia
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Java Edition</span>
+                                <span class="feature-tag">Full Access</span>
+                                <span class="feature-tag">Garantia</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 45</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="product-badge">Novo</span>
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">AP</div>
+                                <span class="seller-name">ApexPlayer</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Apex Legends Predator</h3>
+                            <p class="product-description">
+                                Conta rank Predator com todas as lendas desbloqueadas e skins heirloom
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Predator</span>
+                                <span class="feature-tag">Heirlooms</span>
+                                <span class="feature-tag">Badges</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 580</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 7 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">CS</div>
+                                <span class="seller-name">CSTrader</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">CS:GO Prime com Skins</h3>
+                            <p class="product-description">
+                                Conta Prime Status com inventário de skins no valor de R$ 300+
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Prime</span>
+                                <span class="feature-tag">Skins</span>
+                                <span class="feature-tag">MG2</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 220</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 8 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">FF</div>
+                                <span class="seller-name">FreeFire_BR</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Free Fire Heroico V</h3>
+                            <p class="product-description">
+                                Conta Heroico V com diversos pacotes, pets e skins exclusivas de eventos
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Heroico V</span>
+                                <span class="feature-tag">Pets</span>
+                                <span class="feature-tag">Eventos</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 75</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 9 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="product-badge">Oferta</span>
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4A8C3C" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <div class="seller-badge">BW</div>
+                                <span class="seller-name">BrawlWorld</span>
+                                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="product-title">Brawl Stars 40+ Brawlers</h3>
+                            <p class="product-description">
+                                Conta com mais de 40 brawlers desbloqueados e várias skins lendárias
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">40+ Brawlers</span>
+                                <span class="feature-tag">Skins Lendárias</span>
+                                <span class="feature-tag">20k Troféus</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">a partir de</span>
+                                    <span class="price-value">R$ 65</span>
+                                </div>
+                                <button class="buy-btn">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // View toggle functionality
+        const viewButtons = document.querySelectorAll('.view-btn');
+        const productsGrid = document.querySelector('.products-grid');
+
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Product card click
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('buy-btn')) {
+                    console.log('Produto clicado - abrir detalhes');
+                }
+            });
+        });
+
+        // Buy button
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        buyButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log('Comprar produto');
+            });
+        });
+
+        // Filter functionality
+        const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+        filterCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                console.log('Filtro aplicado');
+                // Aqui você implementaria a lógica de filtro
+            });
+        });
+
+        // Sort dropdown
+        const sortDropdown = document.querySelector('.sort-dropdown');
+        sortDropdown.addEventListener('change', (e) => {
+            console.log('Ordenar por:', e.target.value);
+            // Aqui você implementaria a lógica de ordenação
+        });
+
+        // Price filter
+        const applyFilterBtn = document.querySelector('.apply-filter-btn');
+        applyFilterBtn.addEventListener('click', () => {
+            const minPrice = document.querySelectorAll('.price-input')[0].value;
+            const maxPrice = document.querySelectorAll('.price-input')[1].value;
+            console.log(`Filtrar: R$ ${minPrice} - R$ ${maxPrice}`);
+        });
+
+        // Smooth scroll animation for product cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 50);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        productCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
