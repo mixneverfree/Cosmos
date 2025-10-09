@@ -42,10 +42,10 @@
         .frase-circulo {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            border: 1px solid #578D3F;
-            background-color: #36652f1a;
-            color: #578D3F;
+            gap: 0.75rem;
+            border: 1px solid rgba(74, 140, 60, 0.3);
+            background-color: rgba(54, 101, 47, 0.15);
+            color: #4A8C3C;
             font-size: 0.875rem;
             line-height: 1.25rem;
             font-weight: 600;
@@ -55,11 +55,62 @@
             border-radius: 99999px;
         }
 
-        .frase-circulo-icon {
-            width: 0.5rem;
-            height: 0.5rem;
-            background-color: #578D3F;
-            border-radius: 99999px;
+        .ping {
+            position: relative;
+            width: 12px;
+            height: 12px;
+        }
+
+        .icon-circulo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #4A8C3C;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .ring-circulo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border: 2px solid #4A8C3C;
+            border-radius: 50%;
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            0% {
+                width: 12px;
+                height: 12px;
+                opacity: 1;
+            }
+
+            100% {
+                width: 36px;
+                height: 36px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .texto-principal {
@@ -126,7 +177,8 @@
         }
 
         .descobrir:hover {
-            background-image: linear-gradient(135deg, #36652f, #1c3418);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(54, 101, 47, 0.5);
         }
 
         .login {
@@ -530,7 +582,7 @@
             background-size: 1.25rem;
         }
 
-        .search-bar-input:hover{
+        .search-bar-input:hover {
             border: 2px solid rgba(74, 140, 60, 0.2);
         }
 
@@ -1034,7 +1086,10 @@
             <div class="section1-container">
                 <div class="design-main">
                     <div class="frase-circulo">
-                        <span class="frase-circulo-icon"></span>
+                        <div class="ping">
+                            <div class="icon-circulo"></div>
+                            <div class="ring-circulo"></div>
+                        </div>
                         Negócios virtuais seguros
                     </div>
                     </span>
