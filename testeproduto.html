@@ -1,11 +1,442 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cosmos - Pacote de Moedas Raras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===================== VARIÁVEIS E BASE ===================== */
+
+        :root {
+            --color-primary: #4A8C3C; /* Verde Cosmos */
+            --color-primary-dark: #36652f;
+            --color-text-light: #fbfafa;
+            --color-text-secondary: #aab0bb;
+            --color-text-subtle: #6b7280;
+            --color-bg-card: rgba(23, 23, 23, 0.7);
+            --color-border: rgba(74, 140, 60, 0.2);
+            --border-radius-lg: 1.5rem;
+            --border-radius-md: 1rem;
+            --max-width: 72rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            /* Fundo escuro com gradientes verdes */
+            background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), 
+                        radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), 
+                        linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--color-text-light);
+            padding-top: 5rem;
+            overflow-x: hidden; /* Previne rolagem horizontal */
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ===================== HEADER E NAVEGAÇÃO ===================== */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 9999; backdrop-filter: blur(12px); /* Efeito translúcido */
+            border-bottom: 1px solid var(--color-border); background: rgba(0, 0, 0, 0.4);
+        }
+        .header-container { max-width: var(--max-width); margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; color: var(--color-text-light); }
+        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--color-text-light); }
+        
+        /* Breadcrumb */
+        .breadcrumb { padding: 2rem 1.5rem 1rem; }
+        .breadcrumb-container { max-width: var(--max-width); margin: 0 auto; display: flex; gap: 0.5rem; font-size: 0.875rem; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--color-text-subtle); transition: color 0.3s ease; }
+        .breadcrumb a:hover { color: var(--color-primary); }
+        .breadcrumb-separator { color: #4a5568; }
+        .breadcrumb-current { color: var(--color-primary); font-weight: 600; }
+
+        /* ===================== LAYOUT PRINCIPAL (DESKTOP-FIRST) ===================== */
+
+        .main-content { padding: 0 1.5rem 6rem; max-width: var(--max-width); margin: 0 auto; }
+        
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* Layout 50/50 no Desktop */
+            gap: 3rem; 
+            margin-bottom: 4rem; 
+        }
+        
+        /* Imagem/Placeholder */
+        .product-image { 
+            width: 100%; 
+            aspect-ratio: 1; 
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a); 
+            border-radius: var(--border-radius-lg); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 1px solid var(--color-border); 
+        }
+
+        .product-image svg {
+            width: 180px; /* Tamanho do Placeholder */
+            height: 180px;
+            opacity: 0.4;
+            color: var(--color-primary);
+        }
+
+        .product-right { display: flex; flex-direction: column; gap: 2rem; }
+        .product-header { border-bottom: 1px solid rgba(74, 140, 60, 0.1); padding-bottom: 2rem; }
+        
+        /* Seller Info */
+        .seller-info { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .seller-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-text-light); }
+        .verified-badge { width: 16px; height: 16px; color: var(--color-primary); }
+        .rating { font-size: 0.8125rem; color: var(--color-text-subtle); background: rgba(74, 140, 60, 0.1); padding: 0.375rem 0.75rem; border-radius: 9999px; }
+        .product-title { font-size: 2rem; font-weight: 800; color: var(--color-text-light); margin: 1rem 0; }
+        .product-description { font-size: 1rem; color: var(--color-text-secondary); line-height: 1.7; }
+        
+        /* Opções/Variações */
+        .product-options { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(74, 140, 60, 0.1); }
+        .options-label { font-size: 1rem; font-weight: 700; color: var(--color-text-light); margin-bottom: 1rem; }
+        .options-list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .option-card {
+            display: block; background: rgba(23, 23, 23, 0.8); border: 2px solid rgba(74, 140, 60, 0.2);
+            border-radius: 0.75rem; padding: 0.75rem 1rem; text-align: center; cursor: pointer;
+            transition: all 0.3s ease; min-width: 120px;
+        }
+        .option-card:hover { border-color: var(--color-primary); }
+        .option-card.selected { border-color: var(--color-primary); background: rgba(74, 140, 60, 0.2); box-shadow: 0 0 10px rgba(74, 140, 60, 0.3); }
+        .option-value { font-size: 1.125rem; font-weight: 700; color: var(--color-primary); line-height: 1.2; }
+        .option-price { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+        /* Preço e Botões de Ação */
+        .price-section {
+            background: linear-gradient(145deg, rgba(54, 101, 47, 0.15), rgba(74, 140, 60, 0.08));
+            border: 1px solid rgba(74, 140, 60, 0.3);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+        }
+        .price-label { font-size: 0.875rem; color: var(--color-text-subtle); text-transform: uppercase; }
+        .price-value { font-size: 3rem; font-weight: 800; color: var(--color-primary); margin: 1rem 0 1.5rem; }
+        .action-buttons { display: flex; flex-direction: column; gap: 1rem; }
+        .btn-buy { padding: 1.25rem; background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); color: var(--color-text-light); border: none; border-radius: var(--border-radius-md); font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+        .btn-buy:hover { transform: translateY(-2px); }
+        .btn-cart { padding: 1.25rem; background: transparent; color: var(--color-text-light); border: 2px solid var(--color-primary); border-radius: var(--border-radius-md); font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+        .btn-cart:hover { background: rgba(74, 140, 60, 0.1); }
+        .btn-cart svg { width: 24px; height: 24px; }
+
+        /* Features */
+        .features-list { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+        .feature-item { display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 500; color: var(--color-text-secondary); }
+        .feature-item svg { width: 20px; height: 20px; color: var(--color-primary); fill: var(--color-primary); }
+
+        /* Detalhes (Sections Full Width) */
+        .details-section, .questions-section { background: linear-gradient(145deg, rgba(23, 23, 23, 0.7), rgba(15, 15, 15, 0.5)); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: 2.5rem; margin-bottom: 2rem; }
+        .section-title { font-size: 1.5rem; font-weight: 800; color: var(--color-text-light); margin-bottom: 2rem; }
+        .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .detail-card { background: linear-gradient(145deg, rgba(23, 23, 23, 0.7), rgba(15, 15, 15, 0.5)); border: 1px solid var(--color-border); border-radius: 1.25rem; padding: 1.75rem; transition: all 0.3s ease; }
+        .detail-card:hover { transform: translateY(-4px); border-color: rgba(74, 140, 60, 0.4); }
+        .detail-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); border-radius: 0.875rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .detail-icon svg { width: 24px; height: 24px; color: var(--color-text-light); }
+        .detail-label { font-size: 0.875rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .detail-value { font-size: 1rem; color: var(--color-text-light); font-weight: 600; }
+
+        /* Dúvidas (Q&A) */
+        .questions-list { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem; }
+        .question-item { background: rgba(23, 23, 23, 0.5); border: 1px solid rgba(74, 140, 60, 0.15); border-radius: var(--border-radius-md); padding: 1.5rem; }
+        .question-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .question-avatar { width: 36px; height: 36px; background: #5a6470; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; color: var(--color-text-light); }
+        .question-answer { padding: 1rem 0 0 1.5rem; border-left: 3px solid var(--color-primary); }
+        .answer-avatar { width: 36px; height: 36px; background: var(--color-primary); border-radius: 50%; }
+        .answer-user { font-size: 0.9375rem; font-weight: 700; color: var(--color-primary); }
+
+        /* Formulário de Pergunta */
+        .question-form { background: rgba(54, 101, 47, 0.1); border: 1px solid rgba(74, 140, 60, 0.25); border-radius: 1.25rem; padding: 2rem; }
+        .form-input, .form-textarea { width: 100%; padding: 0.875rem; background: rgba(10, 10, 10, 0.8); border: 1.5px solid #2a2a2a; border-radius: 0.75rem; color: var(--color-text-light); font-family: inherit; font-size: 0.9375rem; outline: none; transition: all 0.3s ease; }
+        .form-textarea { resize: vertical; min-height: 100px; }
+        .form-input:focus, .form-textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1); }
+        .btn-submit { width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); color: var(--color-text-light); border: none; border-radius: 0.875rem; font-weight: 700; cursor: pointer; margin-top: 1rem; transition: all 0.3s ease; }
+
+
+        /* ===================== RESPONSIVIDADE ===================== */
+
+        /* Tablets e Telas Médias (abaixo de 1024px) */
+        @media (max-width: 1024px) {
+            .product-grid { 
+                grid-template-columns: 1fr; /* Colapso para uma única coluna */
+                gap: 2rem; 
+            }
+        }
+
+        /* Celulares (abaixo de 768px) */
+        @media (max-width: 768px) {
+            .product-title { font-size: 1.5rem; }
+            .price-value { font-size: 2.5rem; }
+            
+            /* Botões de ação lado a lado */
+            .action-buttons { flex-direction: row; } 
+            .btn-buy, .btn-cart { width: 50%; padding: 1rem; font-size: 1rem; }
+
+            .details-grid { grid-template-columns: 1fr; } 
+            .questions-section, .details-section { padding: 1.5rem; }
+            
+            /* Ajuste fino das opções de variação */
+            .option-card { min-width: 80px; padding: 0.6rem 0.8rem; flex-grow: 1; }
+        }
+
+        /* Celulares Muito Pequenos (abaixo de 480px) */
+        @media (max-width: 480px) {
+            .product-title { font-size: 1.25rem; }
+            .price-value { font-size: 2rem; }
+            
+            /* Empilha os botões para telas estreitas */
+            .action-buttons { flex-direction: column; }
+            .btn-buy, .btn-cart { width: 100%; }
+
+            /* Faz as opções de variação se expandirem */
+            .options-list { justify-content: space-between; }
+            .option-card { flex-grow: 1; }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">C</div>
+                <span class="logo-text">Cosmos</span>
+            </a>
+            </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="index.html">Início</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="categorias.html">Moedas Virtuais</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Pacote de Moedas Raras</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="product-grid">
+            <div class="product-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="8.5" cy="8.5" r="5.5"/>
+                    <circle cx="15.5" cy="15.5" r="5.5"/>
+                    <path d="M3 3h18v18H3z"/>
+                </svg>
+            </div>
+
+            <div class="product-right">
+                <div class="product-header">
+                    <div class="seller-info">
+                        <div class="seller-avatar">MT</div>
+                        <span class="seller-name">MarketTreasures</span>
+                        <svg class="verified-badge" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="rating">5.0 ⭐ (98 avaliações)</span>
+                    </div>
+                    <h1 class="product-title">Pacote de Moedas Raras de RPG (Universo: Astra)</h1>
+                    <p class="product-description">
+                        Este pacote contém Moedas Astra (MA) raras, essenciais para comprar itens lendários no game. Entrega rápida via transferência interna. Oportunidade limitada.
+                    </p>
+                </div>
+
+                <div class="product-options">
+                    <div class="options-label">Selecione a Quantidade de Moedas Astra (MA):</div>
+                    <div class="options-list">
+                        <div class="option-card selected" data-price="49,90">
+                            <div class="option-value">1.000 MA</div>
+                            <div class="option-price">R$ 49,90</div>
+                        </div>
+                        <div class="option-card" data-price="89,90">
+                            <div class="option-value">2.500 MA</div>
+                            <div class="option-price">R$ 89,90</div>
+                        </div>
+                        <div class="option-card" data-price="169,90">
+                            <div class="option-value">5.000 MA</div>
+                            <div class="option-price">R$ 169,90</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <div class="price-label">Preço Selecionado</div>
+                    <div class="price-value" id="current-price-display">R$ 49,90</div>
+                    <div class="action-buttons">
+                        <button class="btn-buy">Comprar Agora</button>
+                        <button class="btn-cart">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="features">
+                    <div class="features-title">Vantagens deste Pacote</div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span class="feature-text">Moeda Rara In-Game</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span class="feature-text">Entrega 5 Minutos</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span class="feature-text">Compra de Itens Lendários</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <h2 class="section-title">Detalhes Técnicos do Item</h2>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="detail-label">Segurança</div>
+                    <div class="detail-value">Transferência Interna (100% segura)</div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="detail-label">Tempo de Entrega</div>
+                    <div class="detail-value">Imediatamente após confirmação de nick</div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="detail-label">Utilidade</div>
+                    <div class="detail-value">Compra de SKINS/ITENS Lendários</div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="detail-label">Compatibilidade</div>
+                    <div class="detail-value">Qualquer conta com nível superior a 5</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="questions-section">
+            <h2 class="section-title">Dúvidas sobre o Pacote de Moedas</h2>
+            
+            <div class="questions-list">
+                
+                <div class="question-item">
+                    <div class="question-header">
+                        <div class="question-avatar">CR</div>
+                        <div class="question-info">
+                            <div class="question-user">Carlos Rocha</div>
+                            <div class="question-date">Há 1 dia</div>
+                        </div>
+                    </div>
+                    <div class="question-text">É possível comprar itens diretamente para outra conta com essas moedas?</div>
+                    <div class="question-answer">
+                        <div class="answer-header">
+                            <div class="answer-avatar">MT</div>
+                            <div class="answer-user">MarketTreasures (Vendedor)</div>
+                        </div>
+                        <div class="answer-text">Olá! As moedas serão transferidas diretamente para a sua conta. Você pode usá-las para presentear itens depois, mas a transferência inicial é para o comprador.</div>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <div class="question-header">
+                        <div class="question-avatar">FS</div>
+                        <div class="question-info">
+                            <div class="question-user">Fernanda Souza</div>
+                            <div class="question-date">Há 4 dias</div>
+                        </div>
+                    </div>
+                    <div class="question-text">Quais são os riscos de banimento?</div>
+                    <div class="question-answer">
+                        <div class="answer-header">
+                            <div class="answer-avatar">MT</div>
+                            <div class="answer-user">MarketTreasures (Vendedor)</div>
+                        </div>
+                        <div class="answer-text">Risco zero! A transferência é feita de forma 100% legítima via sistema de troca do jogo. Já vendemos para centenas de clientes sem problemas.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-form">
+                <h3 class="form-title">Faça sua pergunta</h3>
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Seu Nome</label>
+                        <input type="text" class="form-input" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Sua Pergunta</label>
+                        <textarea class="form-textarea" placeholder="Digite sua pergunta sobre este produto..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Pergunta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de seleção de variação e atualização de preço
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // 1. Remove a seleção de todos
+                document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                
+                // 2. Adiciona a seleção ao clicado
+                card.classList.add('selected');
+
+                // 3. Atualiza o preço na seção de compra
+                const newPrice = card.getAttribute('data-price');
+                document.getElementById('current-price-display').textContent = `R$ ${newPrice}`;
+            });
+        });
+
+        // Simulação de ações dos botões
+        document.querySelector('.btn-buy').addEventListener('click', () => {
+            alert('Pacote de moedas selecionado! Redirecionando para checkout...');
+        });
+
+        document.querySelector('.btn-cart').addEventListener('click', () => {
+            alert('Pacote de moedas adicionado ao carrinho!');
+        });
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Pergunta enviada! O vendedor responderá em breve.');
+        });
+    </script>
 </body>
+
 </html>

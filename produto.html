@@ -115,8 +115,7 @@
         /* IMAGEM */
         .product-image {
             width: 100%;
-            max-height: 60vh;
-            aspect-ratio: 1 / 1 ;
+            aspect-ratio: 1;
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
             border-radius: 1.5rem;
             display: flex;
@@ -192,6 +191,58 @@
             font-size: 1rem;
             color: #aab0bb;
             line-height: 1.7;
+        }
+
+        /* FEATURES */
+        .features {
+            background: linear-gradient(145deg, rgba(54, 101, 47, 0.1), rgba(74, 140, 60, 0.05));
+            border: 1px solid rgba(74, 140, 60, 0.25);
+            border-radius: 1.25rem;
+            padding: 2rem;
+        }
+
+        .features-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fbfafa;
+            margin-bottom: 1rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(23, 23, 23, 0.5);
+            border-radius: 0.75rem;
+            border: 1px solid rgba(74, 140, 60, 0.15);
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+        }
+
+        .feature-icon svg {
+            width: 16px;
+            height: 16px;
+            color: #fbfafa;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: #fbfafa;
+            font-weight: 600;
         }
 
         /* PREÇO */
@@ -280,7 +331,7 @@
 
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(8, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
@@ -475,6 +526,10 @@
             .product-grid {
                 grid-template-columns: 1fr;
             }
+
+            .features-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -557,6 +612,39 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- FEATURES -->
+                <div class="features">
+                    <div class="features-title">O que está incluído</div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <span class="feature-text">150+ Skins</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <span class="feature-text">Email Incluso</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <span class="feature-text">Nível 287</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- DETALHES - FULL WIDTH -->
         <div class="details-section">
@@ -679,6 +767,10 @@
             <div class="question-form">
                 <h3 class="form-title">Faça sua pergunta</h3>
                 <form>
+                    <div class="form-group">
+                        <label class="form-label">Seu Nome</label>
+                        <input type="text" class="form-input" placeholder="Digite seu nome" required>
+                    </div>
 
                     <div class="form-group">
                         <label class="form-label">Sua Pergunta</label>
