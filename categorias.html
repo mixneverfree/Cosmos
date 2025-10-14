@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="Arquivos/Cosmos.png" type="image/x-icon">
+    <link rel="stylesheet" href="normalize.css">
     <style>
         * {
             margin: 0;
@@ -16,9 +19,9 @@
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), 
-                        radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), 
-                        linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
+            background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%),
+                radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%),
+                linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
             background-attachment: fixed;
             min-height: 100vh;
             color: #fbfafa;
@@ -29,63 +32,222 @@
         header {
             position: fixed;
             top: 0;
-            width: 100%;
+            width: calc(100% - 0.5rem);
             z-index: 9999;
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(74, 140, 60, 0.2);
-            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid #333333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.2);
+            transition: backdrop-filter 0.5s ease-in-out;
         }
 
         .header-container {
+            width: 100%;
             max-width: 72rem;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding-inline: 1.50rem;
+            padding-block: 0.75rem;
+            margin-inline: auto;
+        }
+
+        .div-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
+            flex-direction: row;
+            gap: 0.25rem;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #36652f, #4A8C3C);
-            border-radius: 0.5rem;
+        .logo img {
+            width: 50px;
+            height: 50px;
+            max-width: 100%;
+            min-width: 2.5rem;
+            min-height: 2.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.1);
+        }
+
+        .cosmos-txt {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #fbfafa;
+            font-size: 1.25rem;
+            line-height: 1;
+            font-weight: 500;
+        }
+
+        .search-bar {
             display: flex;
+            position: relative;
+            flex: 1;
+            max-width: 28rem;
+            margin-inline: 2rem;
+        }
+
+        .search-bar-input {
+            width: 100%;
+            height: 2.5rem;
+            padding-inline: 0.75rem;
+            padding-block: 0.5rem;
+            padding-left: 3rem;
+            background-color: transparent;
+            border: 2px solid #333333;
+            border-radius: 0.875rem;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: calc(1.25 / 0.875);
+            background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23aab0bb%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%278%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.65%27%20y2%3D%2716.65%27%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: left 1.125rem center;
+            background-size: 1.25rem;
+        }
+
+        .search-bar-input:hover {
+            border: 2px solid rgba(74, 140, 60, 0.2);
+        }
+
+        .search-bar-input:focus {
+            border: 2px solid #4A8C3C;
+            box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar-button {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fbfafa;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #fbfafa;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #aab0bb;
-            text-decoration: none;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            font-family: "Inter", system-ui, sans-serif;
+            padding-inline: 0.75rem;
+            border-radius: 0.375rem;
+            height: 2.25rem;
+            cursor: pointer;
+            color: #aab0bb;
+            transition: all 0.5s ease;
+
         }
 
-        .nav-links a:hover {
+        .navbar-button:hover {
             color: #4A8C3C;
+        }
+
+        .div-buttons-navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #fbfafa;
+        }
+
+        .div-buttons-navbar svg {
+            pointer-events: none;
+            width: 1rem;
+            height: 1rem;
+            flex-shrink: 0;
+        }
+
+        .button-login {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: "Inter", system-ui, sans-serif;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            padding-inline: 0.75rem;
+            border-radius: 2rem;
+            height: 2.25rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            background-color: #171717;
+        }
+
+        .button-login:hover {
+            background-color: #111111;
+            color: #4A8C3C;
+        }
+
+        .button-venda {
+            background-color: #24421E;
+            border: 2px solid #4A8C3C;
+            display: inline-flex;
+            font-family: "Inter", system-ui, sans-serif;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            padding-inline: 0.75rem;
+            border-radius: 2rem;
+            height: 2.25rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .button-venda:hover {
+            background-color: #4A8C3C;
+        }
+
+        .button-profile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            padding-inline: 0.75rem;
+            border-radius: 0.375rem;
+            height: 2.25rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border: 1px solid #333333;
+            border-radius: 1.25rem;
+            padding: 0.5rem;
+            height: 2.5rem;
+            width: 2.5rem;
+        }
+
+        .button-profile:hover {
+            color: #4A8C3C;
+            border-color: #171717;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: #fbfafa;
+            z-index: 1001;
+        }
+
+        .hidden-md {
+            display: none;
+            margin-top: 1rem;
         }
 
         /* HERO SECTION */
@@ -113,18 +275,73 @@
             margin-bottom: 1.5rem;
         }
 
+        .ping {
+            position: relative;
+            width: 12px;
+            height: 12px;
+        }
+
+        .icon-circulo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #4A8C3C;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .ring-circulo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border: 2px solid #4A8C3C;
+            border-radius: 50%;
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            0% {
+                width: 12px;
+                height: 12px;
+                opacity: 1;
+            }
+
+            100% {
+                width: 36px;
+                height: 36px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
         .hero-title {
             font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fbfafa 0%, #aab0bb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .hero-title .highlight {
-            background: linear-gradient(135deg, #4A8C3C, #578D3F);
+        .highlight {
+            background: linear-gradient(135deg, #417939 0%, #417939 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -299,7 +516,27 @@
             z-index: 2;
         }
 
+        /* ===== FONTES ===== */
+
+        @font-face {
+            font-family: Noopla;
+            src: url('Arquivos/font/NooplaRegular.woff') format('woff');
+            src: url('Arquivos/font/NooplaRegular.woff2') format('.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* RESPONSIVE */
+        @media (max-width: 1024px) {
+                        .navbar {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
@@ -311,6 +548,47 @@
 
             .nav-links {
                 display: none;
+            }
+
+                        .search-bar {
+                display: none;
+            }
+
+            .hidden-md {
+                display: block;
+            }
+
+            .search-bar-md {
+                position: relative;
+            }
+
+            .search-bar-md-input {
+                display: flex;
+                height: 2.5rem;
+                width: 100%;
+                border: 2px solid #333333;
+                padding-inline: 0.75rem;
+                padding-block: 0.5rem;
+                padding-left: 3rem;
+                font-size: 1rem;
+                border-radius: 0.875rem;
+                line-height: 1.5rem;
+                font-weight: 400;
+                transition: all 0.3s ease;
+                background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23aab0bb%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%278%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.65%27%20y2%3D%2716.65%27%2F%3E%3C%2Fsvg%3E");
+                background-repeat: no-repeat;
+                background-position: left 1.125rem center;
+                background-size: 1.25rem;
+
+            }
+
+            .search-bar-md-input:hover {
+                border: 2px solid rgba(74, 140, 60, 0.2);
+            }
+
+            .search-bar-md-input:focus {
+                border: 2px solid #4A8C3C;
+                box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
             }
         }
 
@@ -325,30 +603,91 @@
         }
     </style>
 </head>
+
 <body>
     <!-- HEADER -->
     <header>
         <div class="header-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">C</div>
-                <span class="logo-text">Cosmos</span>
-            </a>
-            <nav class="nav-links">
-                <a href="#">Início</a>
-                <a href="#" style="color: #4A8C3C;">Categorias</a>
-                <a href="#">Vender</a>
-                <a href="#">Login</a>
-            </nav>
+            <div class="div-header">
+                <a href="#">
+                    <div class="logo">
+                        <img class="imgn" src="Arquivos/Cosmos.png">
+                        <span class="cosmos-txt">Cosmos</span>
+                    </div>
+                </a>
+
+                <div class="search-bar">
+                    <input type="search-input" placeholder="Buscar produtos..." autocomplete="off"
+                        class="search-bar-input">
+                </div>
+
+                <!-- Botão hamburguer para mobile -->
+                <button class="menu-toggle" aria-label="Abrir menu">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="7" x2="20" y2="7" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="17" x2="20" y2="17" />
+                    </svg>
+                </button>
+
+                <nav class="navbar">
+                    <button class="navbar-button">Início</button>
+                    <button class="navbar-button">Categorias</button>
+                    <div class="div-buttons-navbar">
+
+                        <button class="button-login">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-log-in-icon lucide-log-in">
+                                <path d="m10 17 5-5-5-5" />
+                                <path d="M15 12H3" />
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                            </svg>
+                            Login
+                        </button>
+
+                        <button class="button-venda">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart">
+                                <circle cx="8" cy="21" r="1" />
+                                <circle cx="19" cy="21" r="1" />
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                            </svg>
+                            Vender
+                        </button>
+
+                        <button class="button-profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-icon lucide-user">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+            <div class="hidden-md">
+                <div class="search-bar-md">
+                    <input type="search-input" placeholder="Buscar produtos..." autocomplete="off"
+                        class="search-bar-md-input">
+                </div>
+            </div>
         </div>
+
     </header>
 
     <!-- HERO SECTION -->
     <section class="hero-section">
         <div class="hero-container">
             <div class="hero-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
+                <div class="ping">
+                    <div class="icon-circulo"></div>
+                    <div class="ring-circulo"></div>
+                </div>
                 Mais de 10.000 produtos disponíveis
             </div>
             <h1 class="hero-title">
@@ -360,15 +699,12 @@
 
             <!-- SEARCH -->
             <div class="search-container">
-                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
                 </svg>
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    placeholder="Buscar por jogo, moeda ou item..."
-                >
+                <input type="text" class="search-input" placeholder="Buscar por jogo, moeda ou item...">
             </div>
         </div>
     </section>
@@ -377,14 +713,14 @@
     <section class="categories-section">
         <div class="categories-container">
             <div class="categories-grid">
-                
+
                 <!-- Contas de Jogos -->
                 <div class="category-card">
                     <span class="popular-badge">🔥 Popular</span>
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                            <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                            <line x1="12" y1="18" x2="12.01" y2="18" />
                         </svg>
                     </div>
                     <h3 class="category-title">Contas de Jogos</h3>
@@ -408,8 +744,8 @@
                     <span class="popular-badge">🔥 Popular</span>
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v12M9 9h6M9 15h6"/>
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v12M9 9h6M9 15h6" />
                         </svg>
                     </div>
                     <h3 class="category-title">Moedas Virtuais</h3>
@@ -432,8 +768,8 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2" />
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                         </svg>
                     </div>
                     <h3 class="category-title">Gift Cards</h3>
@@ -456,9 +792,9 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
                         </svg>
                     </div>
                     <h3 class="category-title">Itens In-Game</h3>
@@ -481,7 +817,7 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                         </svg>
                     </div>
                     <h3 class="category-title">Boost & Serviços</h3>
@@ -504,8 +840,8 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                            <path d="M22 2v6h-6"/>
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                            <path d="M22 2v6h-6" />
                         </svg>
                     </div>
                     <h3 class="category-title">Assinaturas</h3>
@@ -528,10 +864,10 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <rect x="3" y="3" width="7" height="7"/>
-                            <rect x="14" y="3" width="7" height="7"/>
-                            <rect x="14" y="14" width="7" height="7"/>
-                            <rect x="3" y="14" width="7" height="7"/>
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" />
                         </svg>
                     </div>
                     <h3 class="category-title">NFTs & Colecionáveis</h3>
@@ -554,7 +890,8 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                            <path
+                                d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
                         </svg>
                     </div>
                     <h3 class="category-title">Códigos & Chaves</h3>
@@ -577,7 +914,7 @@
                 <div class="category-card">
                     <div class="category-icon-wrapper">
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="#fbfafa" stroke-width="2">
-                            <polygon points="5 3 19 12 5 21 5 3"/>
+                            <polygon points="5 3 19 12 5 21 5 3" />
                         </svg>
                     </div>
                     <h3 class="category-title">Streaming & Mídia</h3>
@@ -603,7 +940,7 @@
     <script>
         // Animação de entrada dos cards
         const cards = document.querySelectorAll('.category-card');
-        
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -634,7 +971,7 @@
             cards.forEach(card => {
                 const title = card.querySelector('.category-title').textContent.toLowerCase();
                 const description = card.querySelector('.category-description').textContent.toLowerCase();
-                
+
                 if (title.includes(searchTerm) || description.includes(searchTerm)) {
                     card.style.display = 'block';
                 } else {
@@ -653,4 +990,5 @@
         });
     </script>
 </body>
+
 </html>
