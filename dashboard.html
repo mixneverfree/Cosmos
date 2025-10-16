@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos - Dashboard Vendedor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(ellipse at 50% 10%, hsla(113, 100%, 25%, .05) 0%, hsla(113, 40%, 15%, .03) 30%, hsl(0, 0%, 0%) 70%), 
+                        radial-gradient(ellipse at 80% 60%, hsla(113, 80%, 35%, .03) 0%, transparent 50%), 
+                        linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 40%, hsl(113, 40%, 5%) 80%, hsl(0, 0%, 0%) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #fbfafa;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(74, 140, 60, 0.2);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fbfafa;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fbfafa;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.875rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 0.75rem;
+            color: #aab0bb;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-item:hover {
+            background: rgba(74, 140, 60, 0.1);
+            color: #4A8C3C;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            color: #fbfafa;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fbfafa;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(23, 23, 23, 0.7);
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-menu:hover {
+            border-color: rgba(74, 140, 60, 0.4);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* CONTEÚDO DAS ABAS */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* CARDS */
+        .card {
+            background: linear-gradient(145deg, rgba(23, 23, 23, 0.7), rgba(15, 15, 15, 0.5));
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fbfafa;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon svg {
+            width: 16px;
+            height: 16px;
+            color: #fbfafa;
+        }
+
+        /* FORMULÁRIOS */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #aab0bb;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.875rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1.5px solid #2a2a2a;
+            border-radius: 0.75rem;
+            color: #fbfafa;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #4A8C3C;
+            box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9375rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #36652f, #4A8C3C);
+            color: #fbfafa;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(54, 101, 47, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #4A8C3C;
+            color: #fbfafa;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(74, 140, 60, 0.1);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* TABELAS */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            text-align: left;
+            padding: 1rem;
+            color: #aab0bb;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(74, 140, 60, 0.2);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(74, 140, 60, 0.1);
+            color: #fbfafa;
+        }
+
+        .table tr:hover {
+            background: rgba(74, 140, 60, 0.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .status-approved {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
+        .status-pending {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .status-rejected {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .status-completed {
+            background: rgba(74, 140, 60, 0.15);
+            color: #4A8C3C;
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, rgba(54, 101, 47, 0.1), rgba(74, 140, 60, 0.05));
+            border: 1px solid rgba(74, 140, 60, 0.25);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #aab0bb;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4A8C3C;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(23, 23, 23, 0.5);
+            border: 1px solid rgba(74, 140, 60, 0.15);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 1.125rem;
+            height: 1.125rem;
+            accent-color: #4A8C3C;
+            cursor: pointer;
+        }
+
+        .checkbox-container label {
+            cursor: pointer;
+            color: #fbfafa;
+            flex: 1;
+        }
+
+        .success-alert {
+            padding: 1.5rem;
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-alert p {
+            color: #34d399;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: rgba(23, 23, 23, 0.95);
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            border: 1px solid rgba(74, 140, 60, 0.2);
+            border-radius: 0.75rem;
+            padding: 0.5rem 0;
+            right: 0;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: #fbfafa;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.9375rem;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(74, 140, 60, 0.1);
+            color: #4A8C3C;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 220px;
+                padding: 1.5rem 1rem;
+            }
+
+            .main {
+                margin-left: 220px;
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -260px;
+                z-index: 999;
+                transition: left 0.3s ease;
+                width: 260px;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .table {
+                font-size: 0.875rem;
+            }
+
+            .table th, .table td {
+                padding: 0.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            <span class="logo-text">Cosmos</span>
+        </div>
+
+        <nav class="nav-menu">
+            <button class="nav-item active" data-tab="dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                Dashboard
+            </button>
+            <button class="nav-item" data-tab="verification">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Verificação
+            </button>
+            <button class="nav-item" data-tab="settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/>
+                </svg>
+                Configurações
+            </button>
+            <button class="nav-item" data-tab="purchases">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+                Compras
+            </button>
+            <button class="nav-item" data-tab="sales">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                Vendas
+            </button>
+        </nav>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        <div class="header">
+            <h1 class="header-title">Dashboard</h1>
+            <div class="user-menu" onclick="toggleProfileMenu()">
+                <div class="user-avatar">JG</div>
+                <span>JogadorPro</span>
+                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <div class="dropdown-menu" id="profileMenu">
+                    <button class="dropdown-item" onclick="showAlert('Perfil')">Ver Perfil</button>
+                    <button class="dropdown-item" onclick="showAlert('Notificações')">Notificações</button>
+                    <button class="dropdown-item" onclick="showAlert('Fazer logout')">Sair</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="tab-content active" id="dashboard">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Saldo Disponível</div>
+                    <div class="stat-value">R$ 2.450,00</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Vendas (Mês)</div>
+                    <div class="stat-value">23</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Taxa de Sucesso</div>
+                    <div class="stat-value">98%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avaliação</div>
+                    <div class="stat-value">4.9 ⭐</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    Vendas Recentes
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Comprador</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fortnite Full Access</td>
+                            <td>rafael_silva</td>
+                            <td>R$ 89,00</td>
+                            <td>15/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>League of Legends Platina</td>
+                            <td>lucas_martins</td>
+                            <td>R$ 145,00</td>
+                            <td>14/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Valorant Diamante</td>
+                            <td>amanda_costa</td>
+                            <td>R$ 320,00</td>
+                            <td>13/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>CS:GO Skins Pack</td>
+                            <td>matheus_gamer</td>
+                            <td>R$ 275,00</td>
+                            <td>12/03/2025</td>
+                            <td><span class="status-badge status-pending">Aguardando Confirmação</span></td>
+                        </tr>
+                        <tr>
+                            <td>Roblox Premium</td>
+                            <td>carla_games</td>
+                            <td>R$ 199,00</td>
+                            <td>11/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VERIFICAÇÃO -->
+        <div class="tab-content" id="verification">
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    Verificação de Documentos
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <div class="success-alert">
+                        <span class="status-badge status-approved">Verificado</span>
+                        <p>Sua conta foi verificada com sucesso em 12/03/2025</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.125rem; font-weight: 700; color: #fbfafa; margin: 2rem 0 1rem;">Documentos Enviados</h3>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Data de Envio</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CPF</td>
+                            <td>10/03/2025</td>
+                            <td><span class="status-badge status-approved">Aprovado</span></td>
+                        </tr>
+                        <tr>
+                            <td>RG ou CNH</td>
+                            <td>10/03/2025</td>
+                            <td><span class="status-badge status-approved">Aprovado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Comprovante de Endereço</td>
+                            <td>11/03/2025</td>
+                            <td><span class="status-badge status-approved">Aprovado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Dados Pessoais</div>
+                
+                <form id="personalDataForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Nome Completo</label>
+                            <input type="text" class="form-input" value="João Gabriel Silva" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CPF</label>
+                            <input type="text" class="form-input" value="123.456.789-00" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" class="form-input" value="joao@email.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Telefone</label>
+                            <input type="tel" class="form-input" value="(31) 99999-0000">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Cidade</label>
+                            <input type="text" class="form-input" value="Belo Horizonte">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select">
+                                <option>MG - Minas Gerais</option>
+                                <option>SP - São Paulo</option>
+                                <option>RJ - Rio de Janeiro</option>
+                                <option>BA - Bahia</option>
+                                <option>PE - Pernambuco</option>
+                                <option>SC - Santa Catarina</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- CONFIGURAÇÕES -->
+        <div class="tab-content" id="settings">
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    Configurações da Conta
+                </div>
+
+                <form id="settingsForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Nome de Usuário</label>
+                        <input type="text" class="form-input" value="JogadorPro">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Descrição do Perfil</label>
+                        <textarea class="form-textarea">Vendedor verificado com mais de 500 transações. Especialista em contas de Fortnite e League of Legends.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Métodos de Pagamento Preferidos</label>
+                        <select class="form-select">
+                            <option>Pix (Recomendado)</option>
+                            <option>Transferência Bancária</option>
+                            <option>PayPal</option>
+                        </select>
+                    </div>
+
+                    <div style="background: rgba(74, 140, 60, 0.1); border: 1px solid rgba(74, 140, 60, 0.25); border-radius: 0.75rem; padding: 1.5rem; margin: 2rem 0;">
+                        <div style="font-weight: 600; color: #fbfafa; margin-bottom: 1.5rem;">Notificações</div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="notify-sales" checked>
+                            <label for="notify-sales">Notificar quando houver nova compra</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="notify-weekly" checked>
+                            <label for="notify-weekly">Enviar relatório semanal de vendas</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="notify-messages" checked>
+                            <label for="notify-messages">Notificações de mensagens de clientes</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="notify-promo">
+                            <label for="notify-promo">Promoções e ofertas especiais</label>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Salvar Configurações</button>
+                        <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Segurança</div>
+                <form id="securityForm" onsubmit="handleSecuritySubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Alterar Senha</label>
+                        <input type="password" class="form-input" id="currentPassword" placeholder="Senha atual">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" id="newPassword" placeholder="Nova senha">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" id="confirmPassword" placeholder="Confirmar nova senha">
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Atualizar Senha</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Zona de Perigo</div>
+                <p style="color: #aab0bb; margin-bottom: 1.5rem;">Ações irreversíveis relacionadas à sua conta</p>
+                <div class="form-buttons">
+                    <button class="btn btn-danger" onclick="handleDeleteAccount()">Deletar Conta Permanentemente</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPRAS -->
+        <div class="tab-content" id="purchases">
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    Histórico de Compras
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Vendedor</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conta Roblox Premium</td>
+                            <td>roblox_trader</td>
+                            <td>R$ 199,00</td>
+                            <td>15/03/2025</td>
+                            <td><span class="status-badge status-completed">Entregue</span></td>
+                        </tr>
+                        <tr>
+                            <td>V-Bucks Fortnite</td>
+                            <td>epic_gamer</td>
+                            <td>R$ 120,00</td>
+                            <td>14/03/2025</td>
+                            <td><span class="status-badge status-completed">Entregue</span></td>
+                        </tr>
+                        <tr>
+                            <td>Skin CS:GO Rara</td>
+                            <td>cs_trader</td>
+                            <td>R$ 450,00</td>
+                            <td>12/03/2025</td>
+                            <td><span class="status-badge status-completed">Entregue</span></td>
+                        </tr>
+                        <tr>
+                            <td>Giftcard Steam R$100</td>
+                            <td>steam_reseller</td>
+                            <td>R$ 105,00</td>
+                            <td>10/03/2025</td>
+                            <td><span class="status-badge status-completed">Entregue</span></td>
+                        </tr>
+                        <tr>
+                            <td>Conta Spotify Premium</td>
+                            <td>music_trader</td>
+                            <td>R$ 45,00</td>
+                            <td>08/03/2025</td>
+                            <td><span class="status-badge status-completed">Entregue</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nitro Discord 6 Meses</td>
+                            <td>discord_seller</td>
+                            <td>R$ 89,00</td>
+                            <td>05/03/2025</td>
+                            <td><span class="status-badge status-rejected">Cancelada</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VENDAS -->
+        <div class="tab-content" id="sales">
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    Histórico de Vendas
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Comprador</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fortnite Full Access</td>
+                            <td>rafael_silva</td>
+                            <td>R$ 89,00</td>
+                            <td>15/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>League of Legends Platina IV</td>
+                            <td>lucas_martins</td>
+                            <td>R$ 145,00</td>
+                            <td>14/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Valorant Diamante 2</td>
+                            <td>amanda_costa</td>
+                            <td>R$ 320,00</td>
+                            <td>13/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>CS:GO Skins Pack</td>
+                            <td>matheus_gamer</td>
+                            <td>R$ 275,00</td>
+                            <td>12/03/2025</td>
+                            <td><span class="status-badge status-pending">Aguardando Confirmação</span></td>
+                        </tr>
+                        <tr>
+                            <td>Roblox Premium 1 Ano</td>
+                            <td>carla_games</td>
+                            <td>R$ 199,00</td>
+                            <td>11/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Giftcard Steam R$50</td>
+                            <td>pedro_gamer</td>
+                            <td>R$ 52,50</td>
+                            <td>10/03/2025</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Apex Legends Premium</td>
+                            <td>silva_pro</td>
+                            <td>R$ 89,00</td>
+                            <td>09/03/2025</td>
+                            <td><span class="status-badge status-rejected">Cancelada</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navegação entre abas
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Remove active de todos os nav-items
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Remove active de todos os tab-contents
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                
+                // Adiciona active ao tab-content selecionado
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Dropdown do perfil
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Fecha o menu ao clicar fora
+        document.addEventListener('click', function(event) {
+            const userMenu = document.querySelector('.user-menu');
+            const profileMenu = document.getElementById('profileMenu');
+            
+            if (!userMenu.contains(event.target)) {
+                profileMenu.classList.remove('active');
+            }
+        });
+
+        // Funções de formulário
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showAlert('Alterações salvas com sucesso!');
+        }
+
+        function handleSecuritySubmit(event) {
+            event.preventDefault();
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Preencha todos os campos de senha');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('As senhas não coincidem');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                alert('A senha deve ter no mínimo 8 caracteres');
+                return;
+            }
+
+            showAlert('Senha atualizada com sucesso!');
+            event.target.reset();
+        }
+
+        function handleDeleteAccount() {
+            if (confirm('⚠️ AVISO: Deletar sua conta é permanente e irreversível. Todos os seus dados, histórico de vendas e saldo serão perdidos. Deseja continuar?')) {
+                if (confirm('Tem certeza? Esta ação não pode ser desfeita.')) {
+                    showAlert('Sua conta foi deletada. Redirecionando...');
+                    // Aqui você redirecionaria para a página de login
+                    // window.location.href = '/login';
+                }
+            }
+        }
+
+        function showAlert(message) {
+            // Cria um alerta flutuante
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(52, 211, 153, 0.1);
+                border: 1px solid rgba(52, 211, 153, 0.3);
+                color: #34d399;
+                padding: 1rem 1.5rem;
+                border-radius: 0.75rem;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                font-weight: 600;
+            `;
+            alert.textContent = message;
+            document.body.appendChild(alert);
+
+            // Adiciona a animação
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(400px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Remove após 3 segundos
+            setTimeout(() => {
+                alert.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+
+        // Máscara para telefone
+        document.querySelectorAll('input[type="tel"]').forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    value = '(' + value.substring(0, 2) + ') ' + value.substring(2, 7) + '-' + value.substring(7, 11);
+                }
+                e.target.value = value;
+            });
+        });
+
+        // Formatação de CPF (apenas para exibição)
+        function formatCPF(value) {
+            return value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        }
+
+        // Formatação de valores monetários
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+    </script>
+</body>
+</html>
