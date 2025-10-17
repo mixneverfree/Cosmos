@@ -610,12 +610,10 @@ function showPurchaseDetails(purchaseId) {
         </div>
         <div class="detail-row">
             <span class="detail-label">Status</span>
-            <span class="detail-value">
-                <span class="status-indicator">
-                    <span class="status-dot"></span>
-                    ${purchase.status}
-                </span>
-            </span>
+            <div class="detail-value status-indicator">
+                <span class="status-dot"></span>
+                ${purchase.status}
+            </div>
         </div>
     `;
 
@@ -918,7 +916,7 @@ function generatePixRecharge() {
     const qrDisplay = document.getElementById('pixQrCodeDisplay');
     if (qrDisplay) {
         qrDisplay.style.display = 'block';
-        
+
         // Atualiza o código PIX no input
         const pixCodeInput = document.getElementById('pixCodeInput');
         if (pixCodeInput) {
@@ -937,10 +935,10 @@ function generatePixRecharge() {
         if (confirm('Pagamento PIX detectado! Deseja confirmar a recarga de ' + BRL.format(amount) + '?')) {
             availableBalance += amount;
             computeBalances();
-            
+
             if (qrDisplay) qrDisplay.style.display = 'none';
             if (alert) alert.innerHTML = '';
-            
+
             showToast('Recarga confirmada! Saldo atualizado.', 'success');
         }
     }, 5000);

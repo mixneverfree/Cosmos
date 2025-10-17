@@ -2430,7 +2430,7 @@ button {
     text-transform: uppercase;
     letter-spacing: 0.025em;
     flex-shrink: 0;
-    white-space: nowrap; /* ADICIONADO */
+    white-space: nowrap;
 }
 
 .detail-value {
@@ -2438,10 +2438,11 @@ button {
     color: var(--text-primary);
     font-weight: 700;
     text-align: right;
-    word-break: break-word;
+    word-break: normal; /* MUDADO de break-word para normal */
+    overflow-wrap: break-word; /* Usa isso em vez de word-break */
     letter-spacing: 0 !important;
     word-spacing: 0 !important;
-    /* REMOVA display: flex, align-items e justify-content se tiver */
+    max-width: 60%; /* ADICIONADO - limita largura */
 }
 
 .detail-value.success {
@@ -2476,19 +2477,17 @@ button {
 }
 
 .status-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
+    display: inline-flex !important;
+    flex-direction: row !important; /* ADICIONADO - força horizontal */
+    align-items: center !important;
+    gap: 0.625rem !important;
     letter-spacing: 0 !important;
     word-spacing: 0 !important;
-    line-height: 1.2; /* CORRIGIDO */
-    font-size: 0.9375rem; /* ADICIONADO - garante tamanho consistente */
+    line-height: 1.2;
+    font-size: 0.9375rem;
+    white-space: nowrap !important; /* ADICIONADO - não quebra linha */
 }
 
-.status-indicator * {
-    line-height: inherit; /* Força herança da altura de linha */
-    vertical-align: baseline; /* Reseta alinhamento vertical */
-}
 
 .status-dot {
     width: 10px;
@@ -2497,11 +2496,17 @@ button {
     background: var(--success);
     animation: pulse-dot 2s ease-in-out infinite;
     flex-shrink: 0;
-    align-self: center; /* ADICIONADO - força centralização */
 }
 
 .status-dot.pending {
     background: var(--warning);
+}
+
+.status-text {
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
+    white-space: nowrap !important; /* ADICIONADO */
+    display: inline !important; /* MUDADO de inline-block */
 }
 
 @keyframes pulse-dot {
