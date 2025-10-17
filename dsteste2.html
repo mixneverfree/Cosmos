@@ -5,8 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cosmos - Dashboard Vendedor</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="Arquivos/Cosmos.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
@@ -27,6 +28,275 @@
             color: #fbfafa;
             display: flex;
             overflow-x: hidden;
+            padding-top: 5rem;
+            /* Espaço para o header fixo */
+        }
+
+        /* ===== ESTILOS GERAIS ===== */
+        a {
+            text-decoration: none;
+        }
+
+        /* ===== HEADER (do index.html) ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(74, 140, 60, 0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.2);
+            transition: backdrop-filter 0.5s ease-in-out;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 72rem;
+            padding-inline: 1.50rem;
+            padding-block: 0.75rem;
+            margin-inline: auto;
+        }
+
+        .div-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            height: auto;
+            gap: 0.25rem;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            max-width: 100%;
+            min-width: 2.5rem;
+            min-height: 2.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .cosmos-txt {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #fbfafa;
+            font-size: 1.25rem;
+            line-height: 1;
+            font-weight: 500;
+        }
+
+        .search-bar {
+            display: flex;
+            position: relative;
+            flex: 1;
+            max-width: 28rem;
+            margin-inline: 2rem;
+        }
+
+        .search-bar-input {
+            width: 100%;
+            height: 2.5rem;
+            padding-inline: 0.75rem;
+            padding-block: 0.5rem;
+            padding-left: 3rem;
+            background-color: transparent;
+            border: 2px solid rgba(74, 140, 60, 0.2);
+            border-radius: 0.875rem;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: calc(1.25 / 0.875);
+            color: #fbfafa;
+            background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23aab0bb%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%278%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.65%27%20y2%3D%2716.65%27%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: left 1.125rem center;
+            background-size: 1.25rem;
+        }
+
+        .search-bar-input:hover,
+        .search-bar-input:focus {
+            border: 2px solid #417939;
+            box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
+            outline: none;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            font-family: "Inter", system-ui, sans-serif;
+            padding-inline: 0.75rem;
+            border-radius: 0.375rem;
+            height: 2.25rem;
+            cursor: pointer;
+            color: #aab0bb;
+            background: transparent;
+            border: none;
+            transition: all 0.5s ease;
+        }
+
+        .navbar-button:hover {
+            color: #4A8C3C;
+        }
+
+        .div-buttons-navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #fbfafa;
+        }
+
+        .div-buttons-navbar svg {
+            pointer-events: none;
+            width: 1rem;
+            height: 1rem;
+            flex-shrink: 0;
+        }
+
+        .button-login {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: "Inter", system-ui, sans-serif;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            padding-inline: 0.75rem;
+            border-radius: 2rem;
+            height: 2.25rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            background-color: #171717;
+            border: none;
+            color: #fbfafa;
+        }
+
+        .button-login:hover {
+            background-color: #111111;
+            color: #4A8C3C;
+        }
+
+        .button-venda {
+            background-color: #24421E;
+            border: 2px solid #4A8C3C;
+            color: #fbfafa;
+            display: inline-flex;
+            font-family: "Inter", system-ui, sans-serif;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            padding-inline: 0.75rem;
+            border-radius: 2rem;
+            height: 2.25rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .button-venda:hover {
+            background-color: #4A8C3C;
+        }
+
+        .button-profile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            padding-inline: 0.75rem;
+            border-radius: 0.375rem;
+            height: 2.25rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border: 1px solid #333333;
+            border-radius: 1.25rem;
+            padding: 0.5rem;
+            height: 2.5rem;
+            width: 2.5rem;
+            background: transparent;
+            color: #fbfafa;
+        }
+
+        .button-profile:hover {
+            color: #4A8C3C;
+            border-color: #4A8C3C;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: #fbfafa;
+            z-index: 1001;
+        }
+
+        .hidden-md {
+            display: none;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .search-bar-md {
+            position: relative;
+        }
+
+        .search-bar-md-input {
+            display: flex;
+            height: 2.5rem;
+            width: 100%;
+            border: 2px solid rgba(74, 140, 60, 0.2);
+            padding-inline: 0.75rem;
+            padding-block: 0.5rem;
+            padding-left: 3rem;
+            font-size: 1rem;
+            border-radius: 0.875rem;
+            line-height: 1.5rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            color: #fbfafa;
+            background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23aab0bb%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%278%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.65%27%20y2%3D%2716.65%27%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: left 1.125rem center;
+            background-size: 1.25rem;
+        }
+
+        .search-bar-md-input:hover,
+        .search-bar-md-input:focus {
+            border: 2px solid #4A8C3C;
+            box-shadow: 0 0 0 4px rgba(74, 140, 60, 0.1);
+            outline: none;
         }
 
         /* Scrollbar Custom */
@@ -56,12 +326,13 @@
             border-right: 1px solid rgba(74, 140, 60, 0.2);
             padding: 2rem 1.5rem;
             position: fixed;
-            height: 100vh;
+            height: calc(100vh - 5rem);
+            top: 5rem;
             overflow-y: auto;
             z-index: 100;
         }
 
-        .logo {
+        .logo-sidebar {
             display: flex;
             align-items: center;
             gap: .75rem;
@@ -132,7 +403,7 @@
             padding: 2rem;
         }
 
-        .header {
+        .header-page {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -386,7 +657,6 @@
             margin-bottom: .5rem;
         }
 
-        /* Custom Select */
         .form-select {
             width: 100%;
             padding: .875rem 2.5rem .875rem .875rem;
@@ -505,7 +775,6 @@
             width: 100%;
         }
 
-        /* Botão Ver Detalhes */
         .btn-details {
             display: inline-flex;
             align-items: center;
@@ -538,6 +807,16 @@
         .table {
             width: 100%;
             border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .table thead,
+        .table tbody,
+        .table tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
         }
 
         .table th {
@@ -588,11 +867,11 @@
             color: #4A8C3C;
         }
 
-        /* Modal - SEM SCROLLBAR */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
@@ -621,7 +900,6 @@
             animation: modalSlideIn 0.3s ease;
         }
 
-        /* Remove scrollbar do modal */
         .modal-content::-webkit-scrollbar {
             display: none;
         }
@@ -832,7 +1110,7 @@
             color: #fbbf24;
         }
 
-        /* PIX Account com SVG */
+        /* PIX Account */
         .pix-account {
             background: rgba(23, 23, 23, 0.5);
             border: 2px solid rgba(74, 140, 60, 0.2);
@@ -894,7 +1172,7 @@
             color: #aab0bb;
         }
 
-        /* Withdrawal Options com destaque */
+        /* Withdrawal Options */
         .withdrawal-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -939,7 +1217,6 @@
             height: 24px;
         }
 
-        /* Destaque para Fast */
         .withdrawal-option.fast {
             border-color: rgba(251, 191, 36, 0.3);
             background: linear-gradient(145deg, rgba(251, 191, 36, .08), rgba(251, 191, 36, .05));
@@ -976,7 +1253,7 @@
             margin-top: 0.25rem;
         }
 
-        /* Resumo melhorado */
+        /* Resumo */
         .withdrawal-summary {
             background: linear-gradient(145deg, rgba(54, 101, 47, .1), rgba(74, 140, 60, .05));
             border: 1px solid rgba(74, 140, 60, 0.25);
@@ -1132,7 +1409,7 @@
             font-size: .875rem;
         }
 
-        /* Documentos - CORRIGIDO */
+        /* Documentos */
         .document-upload-wrapper {
             position: relative;
             width: 100%;
@@ -1266,7 +1543,7 @@
             background: rgba(239, 68, 68, .2);
         }
 
-        /* Checkbox Container - MELHORADO */
+        /* Checkbox Container */
         .checkbox-container {
             display: flex;
             align-items: center;
@@ -1335,13 +1612,18 @@
             flex-wrap: wrap;
         }
 
-        /* PIX Code com espaçamento */
         .pix-code-container {
             margin-top: 2rem;
         }
 
-        /* Responsive */
+        /* ===== MEDIA QUERIES - RESPONSIVO ===== */
+
+        /* Tablets e telas médias */
         @media (max-width: 1024px) {
+            body {
+                padding-top: 5rem;
+            }
+
             .sidebar {
                 width: 220px;
             }
@@ -1365,15 +1647,48 @@
             .withdrawal-options {
                 grid-template-columns: 1fr;
             }
+
+            .search-bar {
+                max-width: 20rem;
+                margin-inline: 1rem;
+            }
         }
 
+        /* Mobile e telas pequenas */
         @media (max-width: 768px) {
+            body {
+                padding-top: 8rem;
+            }
+
+            header {
+                padding-block: 0.5rem;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .navbar {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hidden-md {
+                display: block;
+            }
+
             .sidebar {
                 position: fixed;
                 left: -260px;
                 z-index: 999;
                 transition: left .3s ease;
                 width: 260px;
+                top: 0;
+                height: 100vh;
+                padding-top: 5rem;
             }
 
             .sidebar.open {
@@ -1382,6 +1697,13 @@
 
             .main {
                 margin-left: 0;
+                padding: 1rem;
+            }
+
+            .header-page {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
 
             .header-title {
@@ -1400,14 +1722,141 @@
             .danger-zone-actions {
                 flex-direction: column;
             }
+
+            .user-menu {
+                padding: .5rem 1rem;
+            }
+
+            .user-menu span {
+                display: none;
+            }
+
+            .table {
+                font-size: 0.8125rem;
+            }
+
+            .table th,
+            .table td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .detail-value {
+                text-align: left;
+            }
+        }
+
+        /* Telas muito pequenas */
+        @media (max-width: 480px) {
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .cosmos-txt {
+                font-size: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .wallet-amount {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: .75rem 1.25rem;
+                font-size: .875rem;
+            }
+
+            .pix-account {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- ===== HEADER DO INDEX.HTML ===== -->
+    <header>
+        <div class="header-container">
+            <div class="div-header">
+                <a href="index.html">
+                    <div class="logo">
+                        <img class="imgn" src="Arquivos/Cosmos.png" alt="Cosmos Logo">
+                        <span class="cosmos-txt">Cosmos</span>
+                    </div>
+                </a>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar produtos..." autocomplete="off" class="search-bar-input">
+                </div>
+
+                <!-- Botão hamburguer para mobile -->
+                <button class="menu-toggle" aria-label="Abrir menu" onclick="toggleSidebar()">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="7" x2="20" y2="7" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="17" x2="20" y2="17" />
+                    </svg>
+                </button>
+
+                <nav class="navbar">
+                    <a href="index.html"><button class="navbar-button">Início</button></a>
+                    <a href="categorias.html"><button class="navbar-button">Categorias</button></a>
+                    <div class="div-buttons-navbar">
+                        <a href="login.html"><button class="button-login">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m10 17 5-5-5-5" />
+                                    <path d="M15 12H3" />
+                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                                </svg>
+                                Login
+                            </button></a>
+
+                        <button class="button-venda">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="8" cy="21" r="1" />
+                                <circle cx="19" cy="21" r="1" />
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                            </svg>
+                            Vender
+                        </button>
+
+                        <button class="button-profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+            <div class="hidden-md">
+                <div class="search-bar-md">
+                    <input type="text" placeholder="Buscar produtos..." autocomplete="off" class="search-bar-md-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
+    <div class="sidebar" id="sidebar">
+        <div class="logo-sidebar">
             <div class="logo-icon">C</div>
             <span class="logo-text">Cosmos</span>
         </div>
@@ -1455,7 +1904,7 @@
 
     <!-- Main -->
     <div class="main">
-        <div class="header">
+        <div class="header-page">
             <h1 class="header-title" id="headerTitle">Dashboard</h1>
             <div class="user-menu" onclick="toggleProfileMenu()">
                 <div class="user-avatar" id="avatarDisplay">JG</div>
@@ -1587,9 +2036,7 @@
                     <div class="card-title">
                         <div class="card-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
+                                <path d="M4 7h16M4 12h16M4 17h16" />
                             </svg>
                         </div>
                         Saque via PIX
@@ -1597,7 +2044,9 @@
 
                     <div id="withdrawAlert"></div>
 
-                    <div id="pixAccountsList"></div>
+                    <div id="pixAccountsList">
+                        <!-- Contas PIX serão renderizadas aqui -->
+                    </div>
 
                     <button class="btn btn-secondary btn-small" id="addPixToggle">Adicionar nova chave PIX</button>
 
@@ -1633,22 +2082,11 @@
                         <label class="form-label">Tipo de saque</label>
                         <div class="withdrawal-options">
                             <div class="withdrawal-option selected" onclick="selectWithdrawalType(this, 'normal')">
-                                <div class="withdrawal-option-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14" />
-                                    </svg>
-                                </div>
                                 <div class="withdrawal-option-title">Normal</div>
                                 <div class="withdrawal-option-fee">Grátis</div>
                                 <div class="withdrawal-option-time">Até 2 dias úteis</div>
                             </div>
-                            <div class="withdrawal-option fast" onclick="selectWithdrawalType(this, 'fast')">
-                                <div class="withdrawal-option-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                                    </svg>
-                                </div>
+                            <div class="withdrawal-option" onclick="selectWithdrawalType(this, 'fast')">
                                 <div class="withdrawal-option-title">Fast</div>
                                 <div class="withdrawal-option-fee">R$ 3,00</div>
                                 <div class="withdrawal-option-time">Imediato</div>
@@ -1664,18 +2102,11 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Resumo</label>
-                            <div class="withdrawal-summary">
-                                <div class="summary-row">
-                                    <span class="summary-label">Valor:</span>
-                                    <span class="summary-value" id="withdrawSummaryGross">R$ 0,00</span>
-                                </div>
-                                <div class="summary-row">
-                                    <span class="summary-label">Taxa:</span>
-                                    <span class="summary-value" id="withdrawSummaryFee">R$ 0,00</span>
-                                </div>
-                                <div class="summary-row">
-                                    <span class="summary-label">Você recebe:</span>
-                                    <span class="summary-value highlight" id="withdrawSummaryNet">R$ 0,00</span>
+                            <div class="document-status active">
+                                <div>
+                                    <div id="withdrawSummaryGross">Valor: R$ 0,00</div>
+                                    <div id="withdrawSummaryFee">Taxa de saque: R$ 0,00</div>
+                                    <div id="withdrawSummaryNet"><strong>Recebe: R$ 0,00</strong></div>
                                 </div>
                             </div>
                         </div>
@@ -1691,8 +2122,7 @@
                     <div class="card-title">
                         <div class="card-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                                <path d="M12 2v20M5 12h14" />
                             </svg>
                         </div>
                         Recarga de Saldo (PIX)
@@ -1709,13 +2139,11 @@
                         <button class="btn btn-primary" id="generatePixBtn">Gerar código PIX</button>
                         <button class="btn btn-secondary" id="simulatePaymentBtn" disabled>Simular pagamento</button>
                     </div>
-                    <div class="pix-code-container">
-                        <div class="document-status" id="pixCodeWrapper">
-                            <div class="status-indicator approved"></div>
-                            <div>
-                                <div><strong>Copia e Cola PIX</strong></div>
-                                <div id="pixCode" style="word-break: break-all; color:#aab0bb;"></div>
-                            </div>
+                    <div class="document-status" id="pixCodeWrapper">
+                        <div class="status-indicator approved"></div>
+                        <div>
+                            <div><strong>Copia e Cola PIX</strong></div>
+                            <div id="pixCode" style="word-break: break-all; color:#aab0bb;"></div>
                         </div>
                     </div>
                     <div class="wallet-card" style="margin-top:1rem; text-align:left;">
@@ -1773,16 +2201,15 @@
                 </p>
 
                 <div class="form-row">
-                    <div class="document-upload-wrapper">
+                    <div class="form-group">
                         <label class="form-label">Documento de identidade (frente)</label>
                         <label class="document-upload" for="docIdFront">
-                            <div class="document-upload-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="17 8 12 3 7 8" />
-                                    <line x1="12" y1="3" x2="12" y2="15" />
-                                </svg>
-                            </div>
+                            <svg class="document-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
                             <div class="document-upload-text">Clique para enviar</div>
                             <div class="document-upload-hint">RG, CNH ou RNE (frente)</div>
                             <input type="file" id="docIdFront" accept="image/*" />
@@ -1798,16 +2225,15 @@
                         </div>
                     </div>
 
-                    <div class="document-upload-wrapper">
+                    <div class="form-group">
                         <label class="form-label">Documento de identidade (verso)</label>
                         <label class="document-upload" for="docIdBack">
-                            <div class="document-upload-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="17 8 12 3 7 8" />
-                                    <line x1="12" y1="3" x2="12" y2="15" />
-                                </svg>
-                            </div>
+                            <svg class="document-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
                             <div class="document-upload-text">Clique para enviar</div>
                             <div class="document-upload-hint">RG, CNH ou RNE (verso)</div>
                             <input type="file" id="docIdBack" accept="image/*" />
@@ -1825,16 +2251,15 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="document-upload-wrapper">
+                    <div class="form-group">
                         <label class="form-label">Selfie segurando o documento</label>
                         <label class="document-upload" for="docSelfie">
-                            <div class="document-upload-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="17 8 12 3 7 8" />
-                                    <line x1="12" y1="3" x2="12" y2="15" />
-                                </svg>
-                            </div>
+                            <svg class="document-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
                             <div class="document-upload-text">Clique para enviar</div>
                             <div class="document-upload-hint">Segure o documento + papel com "Cosmos" e a data de hoje
                             </div>
@@ -1851,16 +2276,15 @@
                         </div>
                     </div>
 
-                    <div class="document-upload-wrapper">
+                    <div class="form-group">
                         <label class="form-label">Comprovante de residência</label>
                         <label class="document-upload" for="docProofAddress">
-                            <div class="document-upload-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="17 8 12 3 7 8" />
-                                    <line x1="12" y1="3" x2="12" y2="15" />
-                                </svg>
-                            </div>
+                            <svg class="document-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
                             <div class="document-upload-text">Clique para enviar</div>
                             <div class="document-upload-hint">Conta de água/luz/internet ou extrato bancário</div>
                             <input type="file" id="docProofAddress" accept="image/*,application/pdf" />
@@ -2047,7 +2471,9 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeDetailModal()">&times;</button>
             <h2 class="modal-title" id="modalTitle">Detalhes da Transação</h2>
-            <div id="detailsBody"></div>
+            <div id="detailsBody">
+                <!-- preenchido via JS -->
+            </div>
             <div class="form-buttons" style="margin-top:1.5rem;">
                 <button class="btn btn-primary btn-block" onclick="closeDetailModal()">Fechar</button>
             </div>
@@ -2055,6 +2481,84 @@
     </div>
 
     <script>
+        // Função para toggle da sidebar em mobile
+        // Toggle Sidebar (Mobile)
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Fechar sidebar ao clicar fora
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            if (window.innerWidth <= 768 &&
+                !sidebar.contains(e.target) &&
+                !menuToggle.contains(e.target) &&
+                sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Toggle Profile Menu
+        function toggleProfileMenu() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('active');
+            event.stopPropagation();
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('dropdownMenu');
+            const userMenu = document.querySelector('.user-menu');
+            if (!userMenu.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function goToDashboard() {
+            document.querySelector('[data-tab="dashboard"]').click();
+            document.getElementById('dropdownMenu').classList.remove('active');
+        }
+
+        function goToSettings() {
+            document.querySelector('[data-tab="settings"]').click();
+            document.getElementById('dropdownMenu').classList.remove('active');
+        }
+
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                alert('Você foi desconectado com sucesso!');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Navegação entre tabs
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const tab = btn.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(tab).classList.add('active');
+
+                const titleMap = {
+                    dashboard: 'Dashboard',
+                    wallet: 'Carteira',
+                    purchases: 'Minhas Compras',
+                    verification: 'Verificação',
+                    settings: 'Configurações'
+                };
+                document.getElementById('headerTitle').textContent = titleMap[tab] || 'Cosmos';
+
+                // Fechar sidebar em mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('sidebar').classList.remove('open');
+                }
+            });
+        });
         // Utils
         const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
         const fmtDate = (d) => {
@@ -2354,14 +2858,7 @@
 
                 body.innerHTML = `
                     <div class="modal-section">
-                        <div class="modal-section-title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="12" y1="8" x2="12" y2="12"/>
-                                <line x1="12" y1="16" x2="12.01" y2="16"/>
-                            </svg>
-                            Informações Gerais
-                        </div>
+                        <div class="modal-section-title">Informações Gerais</div>
                         <div class="detail-row">
                             <span class="detail-label">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2404,13 +2901,7 @@
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
-                            Valores
-                        </div>
+                        <div class="modal-section-title">Valores</div>
                         <div class="detail-row">
                             <span class="detail-label">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2443,13 +2934,7 @@
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                            Status
-                        </div>
+                        <div class="modal-section-title">Status</div>
                         <div class="detail-row">
                             <span class="detail-label">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2503,14 +2988,7 @@
 
                 body.innerHTML = `
                     <div class="modal-section">
-                        <div class="modal-section-title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="12" y1="8" x2="12" y2="12"/>
-                                <line x1="12" y1="16" x2="12.01" y2="16"/>
-                            </svg>
-                            Informações Gerais
-                        </div>
+                        <div class="modal-section-title">Informações Gerais</div>
                         <div class="detail-row">
                             <span class="detail-label">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2554,13 +3032,7 @@
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
-                            Valores
-                        </div>
+                        <div class="modal-section-title">Valores</div>
                         <div class="detail-row">
                             <span class="detail-label">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2584,13 +3056,7 @@
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                            Status
-                        </div>
+                        <div class="modal-section-title">Status</div>
                         <div class="detail-row">
                             <span class="detail-label">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2669,9 +3135,9 @@
                         <div class="pix-key">${acc.type.toUpperCase()} • ${acc.key}</div>
                         <div class="pix-name">${acc.holder}</div>
                     </div>
-                    <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); deletePixAccount('${acc.id}')">Remover</button>
+                    <button class="btn btn-secondary btn-small" onclick="deletePixAccount('${acc.id}')">Remover</button>
                 `;
-                div.addEventListener('click', () => {
+                div.querySelector('input').addEventListener('change', () => {
                     selectedPix = acc.id;
                     renderPixAccounts();
                 });
@@ -2727,9 +3193,9 @@
             const amount = parseFloat(withdrawAmountEl.value || '0');
             const fee = selectedWithdrawalType === 'fast' && amount > 0 ? 3.00 : 0.00;
             const net = Math.max(amount - fee, 0);
-            document.getElementById('withdrawSummaryGross').textContent = BRL.format(amount || 0);
-            document.getElementById('withdrawSummaryFee').textContent = BRL.format(fee);
-            document.getElementById('withdrawSummaryNet').textContent = BRL.format(net);
+            document.getElementById('withdrawSummaryGross').textContent = `Valor: ${BRL.format(amount || 0)}`;
+            document.getElementById('withdrawSummaryFee').textContent = `Taxa de saque: ${BRL.format(fee)}`;
+            document.getElementById('withdrawSummaryNet').innerHTML = `<strong>Recebe: ${BRL.format(net)}</strong>`;
         }
 
         withdrawAmountEl.addEventListener('input', updateWithdrawSummary);
