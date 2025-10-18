@@ -2445,6 +2445,17 @@ button {
     max-width: 60%; /* ADICIONADO - limita largura */
 }
 
+.detail-value .status-indicator {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.detail-value .status-dot {
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+}
+
 .detail-value.success {
     color: var(--success);
 }
@@ -2841,14 +2852,14 @@ button {
     /* Notification dropdown full width */
     .notification-dropdown {
         width: calc(100vw - 2rem);
-        right: 0;
-        left: 1rem;
+        right: 1rem !important;
+        left: 1rem !important;
     }
 
     .profile-dropdown {
         width: calc(100vw - 2rem);
-        right: 0;
-        left: 1rem;
+        right: 1rem !important;
+        left: 1rem !important;
     }
 
     /* MAIN CONTENT */
@@ -3247,7 +3258,8 @@ button {
     /* NOTIFICATION DROPDOWN */
     .notification-dropdown {
         width: calc(100vw - 1.75rem);
-        left: 0.875rem;
+        right: 0.875rem !important;
+        left: 0.875rem !important;
     }
 
     .notification-header {
@@ -3265,7 +3277,8 @@ button {
     /* PROFILE DROPDOWN */
     .profile-dropdown {
         width: calc(100vw - 1.75rem);
-        left: 0.875rem;
+        right: 0.875rem !important;
+        left: 0.875rem !important;
     }
 
     .profile-dropdown-header {

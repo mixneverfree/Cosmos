@@ -82,7 +82,7 @@ function closeMobileMenu() {
     if (mobileMenu) mobileMenu.classList.remove('active');
     if (menuToggle) menuToggle.classList.remove('active');
     if (overlay) overlay.classList.remove('active');
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''; // JÁ TINHA MAS CONFIRMANDO
 }
 
 function closeSidebar() {
@@ -91,6 +91,7 @@ function closeSidebar() {
 
     if (sidebar) sidebar.classList.remove('open');
     if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = ''; // ADICIONADO
 }
 
 // ===== TOGGLE MOBILE MENU =====
@@ -554,10 +555,7 @@ function showSaleDetails(saleId) {
         </div>
         <div class="detail-row">
             <span class="detail-label">Status do Pagamento</span>
-            <span class="detail-value">
-                <span class="status-dot ${sale.status === 'Concluída' ? '' : 'pending'}"></span>
-            ${sale.status}
-            </span>
+            <span class="detail-value"><span class="status-indicator"><span class="status-dot ${sale.status === 'Concluída' ? '' : 'pending'}"></span>${sale.status}</span></span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Status do Saldo</span>
@@ -610,10 +608,7 @@ function showPurchaseDetails(purchaseId) {
         </div>
         <div class="detail-row">
             <span class="detail-label">Status</span>
-            <div class="detail-value status-indicator">
-                <span class="status-dot"></span>
-                ${purchase.status}
-            </div>
+            <span class="detail-value"><span class="status-indicator"><span class="status-dot"></span>${purchase.status}</span></span>
         </div>
     `;
 
